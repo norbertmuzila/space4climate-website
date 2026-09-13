@@ -1,0 +1,108 @@
+/* Native, unhijacked scrolling for the Webflow export */
+html {
+  scroll-behavior: auto;
+  overflow-x: clip;
+  overflow-y: auto !important;
+  height: auto !important;
+  overscroll-behavior-y: auto;
+}
+
+html.s4c-js {
+  height: auto !important;
+  min-height: 100%;
+  overflow-x: clip !important;
+  overflow-y: auto !important;
+}
+
+html.s4c-js body {
+  height: auto !important;
+  min-height: 100%;
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+html.s4c-js body.u-overflow-hidden {
+  overflow: hidden !important;
+}
+
+.page_wrap,
+.page_main {
+  height: auto !important;
+  transform: none !important;
+}
+
+/* Horizontal-scroll hijack → ordinary vertical layout */
+.scroll-wrapper,
+.second-section,
+.scroll-track,
+.horizontal-scroll-camera,
+.horizontal-scroll-content,
+.scroll-content-wrapper {
+  position: relative !important;
+  inset: auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
+.scroll-track,
+.horizontal-scroll-camera,
+.horizontal-scroll-content {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3rem;
+}
+
+.scroll-content-wrapper {
+  flex: none !important;
+}
+
+.split-chars,
+.split-words,
+.split-lines {
+  transform: none !important;
+  opacity: 1 !important;
+  rotate: none !important;
+}
+
+/* Wheel events hit the page, not the autoplaying hero iframe */
+.section-video-hero iframe,
+iframe.iframe.home,
+.section-video-hero .iframe {
+  pointer-events: none !important;
+}
+
+.section-video-hero {
+  isolation: isolate;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.nav_wrap,
+.nav_component {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.slider-wrapper,
+.swiper,
+.swiper-wrapper {
+  touch-action: pan-y pinch-zoom;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not(.s4c-allow-motion) *,
+  html:not(.s4c-allow-motion) *::before,
+  html:not(.s4c-allow-motion) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
