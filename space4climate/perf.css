@@ -96,9 +96,31 @@ video.g_visual_video,
   isolation: isolate;
 }
 
+#home-cta.button-outline,
+.orbit-hero-cta.button-outline,
+.section-video-hero .button-outline {
+  display: inline-flex !important;
+  align-items: center;
+  width: auto !important;
+  max-width: max-content;
+  gap: 0.65rem;
+}
+
 img {
   max-width: 100%;
   height: auto;
+}
+
+img.u-cover-absolute,
+.u-cover-absolute img,
+.g_visual_wrap img,
+.g_visual_video,
+.hero1_bg_img_wrap img,
+.nav_dropdown_item_visual_wrap img,
+.card.programs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .nav_wrap,

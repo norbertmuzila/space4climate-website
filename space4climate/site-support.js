@@ -80,6 +80,28 @@
     return fallback;
   }
 
+  function repairBrokenMediaUrls() {
+    var leftover = /\s+[A-Za-z0-9_.%-]+\.(jpg|jpeg|png|webp|svg)$/i;
+    document.querySelectorAll("img, source, video").forEach(function (el) {
+      ["src", "poster"].forEach(function (attr) {
+        var val = el.getAttribute(attr);
+        if (val && leftover.test(val)) {
+          el.setAttribute(attr, val.replace(leftover, ""));
+        }
+      });
+      var srcset = el.getAttribute("srcset");
+      if (srcset && leftover.test(srcset)) {
+        el.setAttribute(
+          "srcset",
+          srcset.replace(
+            /(https?:\/\/[^\s,]+?)\s+[A-Za-z0-9_.%-]+\.(?:jpg|jpeg|png|webp|svg)/gi,
+            "$1"
+          )
+        );
+      }
+    });
+  }
+
   function enhanceEmbeds() {
     var embeds = document.querySelectorAll("iframe, video, audio");
     embeds.forEach(function (element, index) {
@@ -103,14 +125,19 @@
       }
 
       if (element.tagName === "VIDEO" || element.tagName === "AUDIO") {
+        var isDecorative = element.hasAttribute("autoplay") && element.hasAttribute("muted");
         if (!element.hasAttribute("preload")) {
-          element.setAttribute("preload", "metadata");
+          element.setAttribute("preload", isDecorative ? "auto" : "metadata");
         }
-        if (!element.hasAttribute("controls")) {
+        if (!isDecorative && !element.hasAttribute("controls")) {
           element.setAttribute("controls", "controls");
         }
         if (element.tagName === "VIDEO") {
           element.setAttribute("playsinline", "playsinline");
+        }
+        if (isDecorative) {
+          element.removeAttribute("controls");
+          element.play().catch(function () {});
         }
         if (!element.getAttribute("aria-label") && !element.getAttribute("title")) {
           element.setAttribute("aria-label", getMediaLabel(element, "Media playback " + (index + 1)));
@@ -251,6 +278,7 @@
   function run() {
     ensurePerfStyles();
     disarmScrollAnimations();
+    repairBrokenMediaUrls();
     enhanceEmbeds();
     flattenScrollHijack();
     tameVideos();
