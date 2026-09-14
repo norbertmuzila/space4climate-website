@@ -1,179 +1,1553 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-wf-domain="space4climate.org" data-wf-site="65b810933000b6b25fd78458" lang="en">
 <head>
-  
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Orbit Scheduler Guide | Space4Climate</title>
-  <meta name="description" content="Learn how to use the Orbit Scheduler — Space4Climate's group availability tool. Create boards, mark your free times, and find the best meeting window for your team.">
+  <meta name="description" content="How to use Orbit Scheduler — Space4Climate’s group availability tool for workshop teams.">
   <link rel="canonical" href="https://www.space4climate.org/commonboard-instructions.html">
+  <link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous">
+  <link href="https://cdn.prod.website-files.com/65b810933000b6b25fd78458/css/m%69ssion-zero-staging-1.shared.64e09cfe5.min.css" rel="stylesheet" type="text/css" integrity="sha384-ZOCc/l4dB8hqChXJKx4r0qSfe2d36vgunliyhB6qhk6o5j6VSb6T726AyhJAcISj" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-T3Z693L3');</script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PQSL59NF4Z"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PQSL59NF4Z');</script>
-  <style>
-    :root {
-      --bg: #05091a; --bg2: #080e22; --surface: rgba(13,20,45,0.88);
-      --border: rgba(80,130,230,0.18); --border2: rgba(80,130,230,0.32);
-      --text: #e8f0ff; --text2: #8fa8d8; --text3: #5577aa;
-      --accent: #4da3ff; --accent2: #22d3a8; --gold: #ffc94d;
-      --font-head: 'Space Grotesk', system-ui, sans-serif;
-      --font-body: 'Inter', system-ui, sans-serif;
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:15px;line-height:1.6;overflow-x:hidden}
-    ::selection{background:rgba(77,163,255,.3)}
-    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(77,163,255,.25);border-radius:99px}
-
-    /* Stars */
-    #stars{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55}
-
-    /* Nav */
-    nav{position:sticky;top:0;z-index:50;background:rgba(5,9,26,.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-    .brand{font-family:var(--font-head);font-weight:700;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:.4rem}
-    .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);box-shadow:0 0 6px var(--accent2)}
-    .brand span{color:var(--accent2)}
-    .nav-links{display:flex;gap:.5rem}
-    .nav-btn{padding:.38rem .8rem;border-radius:8px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:var(--font-body);font-size:.8rem;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s}
-    .nav-btn:hover{background:var(--surface);color:var(--text)}
-    .nav-btn.primary{background:linear-gradient(135deg,#2a7fff,#1ab8e0);border-color:#3a8fef;color:#fff}
-    .nav-btn.primary:hover{opacity:.9}
-
-    /* Page */
-    main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:3rem 1.5rem 5rem}
-
-    /* Hero */
-    .hero{text-align:center;padding:2.5rem 0 3rem}
-    .hero-badge{display:inline-block;padding:.25rem .75rem;border-radius:99px;background:rgba(77,163,255,.1);border:1px solid rgba(77,163,255,.25);color:var(--accent);font-size:.75rem;font-weight:600;letter-spacing:.04em;margin-bottom:1.2rem;text-transform:uppercase}
-    .hero h1{font-family:var(--font-head);font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.02em;line-height:1.1;margin-bottom:.75rem;background:linear-gradient(135deg,#e8f0ff 0%,#4da3ff 50%,#22d3a8 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-    .hero p{font-size:1.05rem;color:var(--text2);max-width:600px;margin:0 auto 2rem}
-    .hero-actions{display:flex;justify-content:center;gap:.75rem;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.2rem;border-radius:9px;font-family:var(--font-body);font-size:.875rem;font-weight:600;cursor:pointer;text-decoration:none;border:1px solid transparent;transition:all .2s}
-    .btn-primary{background:linear-gradient(135deg,#2a7fff,#1ab8e0);border-color:#3a8fef;color:#fff;box-shadow:0 4px 15px rgba(42,127,255,.3)}
-    .btn-primary:hover{box-shadow:0 6px 22px rgba(42,127,255,.45);transform:translateY(-1px)}
-    .btn-outline{border-color:var(--border2);color:var(--text2)}
-    .btn-outline:hover{background:var(--surface);color:var(--text)}
-
-    /* Section */
-    section{margin-bottom:3rem}
-    section h2{font-family:var(--font-head);font-size:1.5rem;font-weight:700;color:var(--text);margin-bottom:1.25rem;display:flex;align-items:center;gap:.6rem}
-    section h2 .tag{font-size:.7rem;font-weight:600;padding:.2rem .5rem;border-radius:99px;background:rgba(77,163,255,.12);border:1px solid rgba(77,163,255,.2);color:var(--accent);font-family:var(--font-body);letter-spacing:.04em}
-
-    /* Step cards */
-    .steps{display:flex;flex-direction:column;gap:1rem}
-    .step{display:flex;gap:1rem;padding:1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:14px;backdrop-filter:blur(10px);transition:border-color .2s}
-    .step:hover{border-color:var(--border2)}
-    .step-num{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,rgba(77,163,255,.2),rgba(34,211,168,.15));border:1px solid rgba(77,163,255,.3);display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:.9rem;color:var(--accent);flex-shrink:0}
-    .step-body h3{font-family:var(--font-head);font-size:.95rem;font-weight:600;color:var(--text);margin-bottom:.35rem}
-    .step-body p{font-size:.85rem;color:var(--text2);line-height:1.55}
-    .step-body code{background:rgba(77,163,255,.1);border:1px solid rgba(77,163,255,.2);border-radius:4px;padding:.1rem .35rem;font-family:monospace;font-size:.8rem;color:var(--accent)}
-    .step-emoji{font-size:1.4rem;margin-right:.1rem}
-
-    /* Feature grid */
-    .feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
-    .feature-card{padding:1.1rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;backdrop-filter:blur(8px)}
-    .feature-card .icon{font-size:1.5rem;margin-bottom:.55rem}
-    .feature-card h4{font-family:var(--font-head);font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:.3rem}
-    .feature-card p{font-size:.8rem;color:var(--text2);line-height:1.5}
-
-    /* FAQ */
-    .faq{display:flex;flex-direction:column;gap:.75rem}
-    .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-    .faq-q{padding:.85rem 1.1rem;font-weight:600;font-size:.88rem;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:.5rem;user-select:none}
-    .faq-q:hover{background:rgba(77,163,255,.04)}
-    .faq-a{padding:0 1.1rem;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease;font-size:.85rem;color:var(--text2);line-height:1.55}
-    .faq-item.open .faq-a{padding:.05rem 1.1rem .85rem;max-height:400px}
-    .faq-chevron{transition:transform .3s;color:var(--text3);flex-shrink:0}
-    .faq-item.open .faq-chevron{transform:rotate(180deg)}
-
-    /* Heat legend demo */
-    .heat-demo{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;padding:.75rem 1rem;background:rgba(5,9,26,.6);border:1px solid var(--border);border-radius:10px;font-size:.8rem;color:var(--text2)}
-    .heat-swatch{width:28px;height:22px;border-radius:5px;flex-shrink:0}
-    .heat-arrow{color:var(--text3);font-size:.9rem}
-
-    /* CTA */
-    .cta-card{background:linear-gradient(135deg,rgba(13,20,45,.95),rgba(10,25,50,.95));border:1px solid rgba(77,163,255,.25);border-radius:16px;padding:2.5rem;text-align:center;position:relative;overflow:hidden}
-    .cta-card::before{content:'';position:absolute;inset:-1px;border-radius:17px;background:linear-gradient(135deg,rgba(77,163,255,.08),rgba(34,211,168,.06));pointer-events:none}
-    .cta-card h2{font-family:var(--font-head);font-size:1.6rem;font-weight:700;margin-bottom:.6rem;background:linear-gradient(90deg,#e8f0ff,#4da3ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-    .cta-card p{color:var(--text2);margin-bottom:1.5rem;font-size:.95rem}
-
-    /* Divider */
-    hr{border:none;border-top:1px solid var(--border);margin:2rem 0}
-
-    @media(max-width:600px){main{padding:2rem 1rem 4rem}.step{flex-direction:column;gap:.75rem}.step-num{width:32px;height:32px;font-size:.8rem}}
-  </style>
-<link rel="stylesheet" href="/perf.css?v=5"/></head>
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  <script>WebFont.load({ google: { families: ["Inter:300,400,500,600,700"] } });</script>
+  <script>!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link href="https://cdn.prod.website-files.com/65b810933000b6b25fd78458/65ee68ecff06a331aa5528f6_fav.png" rel="shortcut icon" type="image/x-icon">
+  <link href="https://cdn.prod.website-files.com/65b810933000b6b25fd78458/65ee690cbe8ebe269fd69846_clip.png" rel="apple-touch-icon">
+  <script>
+  (e=>{e.pageFunctions=e.pageFunctions||{executed:{},functions:{},dependencies:{},requirements:{},addFunction:function(e,t,n=[],i=null){this.functions[e]||(this.functions[e]=t,this.dependencies[e]=n,this.requirements[e]=i)},executeFunctions:function(){if(!this.added){this.added=!0;let i=e=>{if(!this.executed[e]){var t=this.dependencies[e]||[],n=this.requirements[e];if(Array.isArray(t)&&0<t.length&&t.forEach(e=>{this.executed[e]||i(e)}),"font-loaded"===n&&"loaded"!==document.fonts.status)document.fonts.ready.then(()=>{i(e)});else try{this.functions[e](),this.executed[e]=!0}catch(e){}}};for(var e in this.functions)i(e)}}}})(window);
+  </script>
+  <link rel="stylesheet" href="perf.css?v=6">
+  <link rel="stylesheet" href="orbit.css?v=11">
+  <style>:root { --nav--height: 4.5rem; } html { background: #000; }</style>
+</head>
 <body>
-  <!-- Star canvas -->
-  <canvas id="stars"></canvas>
+<div class="page_wrap">
+<div class="page_code_wrap"><div class="page_code_base w-embed"><style>
+  :root {
+    --site--max-width: min(var(--site--width), 100vw);
+    --container--main: calc(var(--site--max-width) - var(--site--margin) * 2);
+    --container--full: calc(100vw - var(--site--margin) * 2);
+    --container--small: calc(var(--column-width--plus-gutter) * (var(--site--column-count) - 2) - var(--site--gutter));
+    --container--tiny: calc(var(--column-width--plus-gutter) * (var(--site--column-count) - 4) - var(--site--gutter));
+    --site--gutter-total: calc(var(--site--gutter) * (var(--site--column-count) - 1));
+    --column-width--1: calc((var(--container--main) - var(--site--gutter-total)) / var(--site--column-count));
+    --column-width--plus-gutter: calc(var(--column-width--1) + var(--site--gutter));
+    --column-width--2: calc(var(--column-width--plus-gutter) * 2 - var(--site--gutter));
+    --column-width--3: calc(var(--column-width--plus-gutter) * 3 - var(--site--gutter));
+    --column-width--4: calc(var(--column-width--plus-gutter) * 4 - var(--site--gutter));
+    --column-width--5: calc(var(--column-width--plus-gutter) * 5 - var(--site--gutter));
+    --column-width--6: calc(var(--column-width--plus-gutter) * 6 - var(--site--gutter));
+    --column-width--7: calc(var(--column-width--plus-gutter) * 7 - var(--site--gutter));
+    --column-width--8: calc(var(--column-width--plus-gutter) * 8 - var(--site--gutter));
+    --column-width--9: calc(var(--column-width--plus-gutter) * 9 - var(--site--gutter));
+    --column-width--10: calc(var(--column-width--plus-gutter) * 10 - var(--site--gutter));
+    --column-width--11: calc(var(--column-width--plus-gutter) * 11 - var(--site--gutter));
+    --column-width--12: calc(var(--column-width--plus-gutter) * 12 - var(--site--gutter));
+    --column-margin--1: calc(var(--column-width--plus-gutter) * 1);
+    --column-margin--2: calc(var(--column-width--plus-gutter) * 2);
+    --column-margin--3: calc(var(--column-width--plus-gutter) * 3);
+    --column-margin--4: calc(var(--column-width--plus-gutter) * 4);
+    --column-margin--5: calc(var(--column-width--plus-gutter) * 5);
+    --column-margin--6: calc(var(--column-width--plus-gutter) * 6);
+    --column-margin--7: calc(var(--column-width--plus-gutter) * 7);
+    --column-margin--8: calc(var(--column-width--plus-gutter) * 8);
+    --column-margin--9: calc(var(--column-width--plus-gutter) * 9);
+    --column-margin--10: calc(var(--column-width--plus-gutter) * 10);
+    --column-margin--11: calc(var(--column-width--plus-gutter) * 11);
+    --column-margin--12: calc(var(--column-width--plus-gutter) * 12);
+    --breakout-start: [full-start] minmax(0, 1fr) [content-start];
+    --breakout-end: [content-end] minmax(0, 1fr) [full-end];
+    --grid-breakout-single: var(--breakout-start) minmax(0, var(--container--main)) var(--breakout-end);
+    --grid-breakout: var(--breakout-start) repeat(var(--site--column-count), minmax(0, var(--column-width--1))) var(--breakout-end);
+    --grid-main: repeat(var(--site--column-count), minmax(0, 1fr));
+    --grid-1: repeat(1, minmax(0, 1fr));
+    --grid-2: repeat(2, minmax(0, 1fr));
+    --grid-3: repeat(3, minmax(0, 1fr));
+    --grid-4: repeat(4, minmax(0, 1fr));
+    --grid-5: repeat(5, minmax(0, 1fr));
+    --grid-6: repeat(6, minmax(0, 1fr));
+    --grid-7: repeat(7, minmax(0, 1fr));
+    --grid-8: repeat(8, minmax(0, 1fr));
+    --grid-9: repeat(9, minmax(0, 1fr));
+    --grid-10: repeat(10, minmax(0, 1fr));
+    --grid-11: repeat(11, minmax(0, 1fr));
+    --grid-12: repeat(12, minmax(0, 1fr));
 
-  <!-- Nav -->
-  <nav>
-    <a class="brand" href="/index.html">
-      <div class="dot"></div>
-      Space<span>4Climate</span>
-    </a>
-    <div class="nav-links">
-      <a class="nav-btn" href="/commonboard.html">Open Scheduler</a>
-      <a class="nav-btn" href="/index.html">Back to site</a>
+    --text-transform--none: none;
+    --text-transform--uppercase: uppercase;
+    --text-transform--capitalize: capitalize;
+    --text-transform--lowercase: lowercase;
+    --text-transform--inherit: inherit;
+  }
+
+  /* Moved all default HTML element selectors inside .u-body */
+  .u-body * {
+    vertical-align: bottom;
+  }
+
+  .u-body {
+    font-weight: var(--text-main--font-weight);
+    text-transform: var(--text-main--text-transform);
+    font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /*
+  .u-body p {
+  font-family: var(--text-main--font-family);
+  font-size: var(--text-main--font-size);
+  line-height: var(--text-main--line-height);
+  letter-spacing: var(--text-main--letter-spacing);
+  font-weight: var(--text-main--font-weight);
+  text-transform: var(--text-main--text-transform);
+  text-wrap: pretty;
+  }
+  */
+
+  .u-body label, 
+  .u-body blockquote {
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: inherit;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  /*
+  .u-body h1, 
+  .u-body h2, 
+  .u-body h3, 
+  .u-body h4, 
+  .u-body h5, 
+  .u-body h6, 
+  .u-body p, 
+  .u-body label, 
+  .u-body blockquote {
+  margin-top: 0;
+  margin-bottom: 0;
+  }
+  */
+
+  .u-body button {
+    background-color: unset;
+    padding: unset;
+    text-align: inherit;
+  }
+
+  .u-body button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  .u-body video {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .u-body video.wf-empty {
+    padding: 0;
+  }
+
+  .u-body svg {
+    max-width: 100%;
+  }
+
+  .u-body section, 
+  .u-body header, 
+  .u-body footer {
+    position: relative;
+  }
+
+  .u-body textarea {
+    resize: vertical;
+  }
+
+  @media (prefers-color-scheme: light) {
+    .u-body option {
+      color: black;
+    }
+  }
+
+  .u-body img::selection {
+    background: transparent;
+  }
+
+  .u-body a:not([class]) {
+    text-decoration: underline;
+  }
+
+  .u-body .w-richtext a {
+    position: relative;
+    z-index: 4;
+  }
+
+  .u-body [class*="u-text-style-"] > :where(h1,h2,h3,h4,h5,h6,p,blockquote) {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    text-wrap: inherit;
+    margin-top: inherit;
+    margin-bottom: inherit;
+  }
+
+  .u-body :not(.u-margin-trim-off, .u-block-gap, .w-background-video) > :not(:not(.w-condition-invisible) ~ :not(.w-condition-invisible)) {
+    margin-top: 0;
+  }
+
+  .u-body :not(.u-margin-trim-off, .u-block-gap, .w-background-video) > :not(:has(~ :not(.w-condition-invisible))) {
+    margin-bottom: 0;
+  }
+
+  /* Non-element specific classes can remain outside .u-body */
+  .u-hide-if-empty:empty,
+  .u-hide-if-empty:not(:has(> :not(.w-condition-invisible))),
+  .u-hide-if-empty-cms:not(:has(.w-dyn-item)),
+  .w-richtext[class*="u-text-style-"] > :not(h1,h2,h3,h4,h5,h6,p,blockquote,ul,ol,span),
+  .mission_item_text_rich > :not(h1,h2,h3,h4,h5,h6,p,blockquote,ul,ol,span),
+  .u-embed-js,
+  .u-embed-css {
+    display: none !important;
+  }
+
+  /* hide section if it has no cms items */
+  [data-cms-check="true"]:not(:has(.w-dyn-item)) {
+    display: none;
+  }
+
+  .u-text-wrap-justify {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    word-spacing: -0.05em;
+  }
+
+  .u-line-clamp-1, .u-line-clamp-2, .u-line-clamp-3, .u-line-clamp-4 {
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+  .u-line-clamp-2 { -webkit-line-clamp: 2; }
+  .u-line-clamp-3 { -webkit-line-clamp: 3; }
+  .u-line-clamp-4 { -webkit-line-clamp: 4; }
+
+  /* Move focus styles into .u-body */
+  .u-body a, 
+  .u-body button, 
+  .u-body [tabindex],
+  .u-body .w-checkbox-input--inputType-custom,
+  .u-body .w-form-formradioinput--inputType-custom {
+    outline-offset: var(--focus--offset-outer);
+  }
+
+  .u-body a:focus-visible,
+  .u-body button:focus-visible,
+  .u-body [tabindex]:focus-visible,
+  .u-body .w-checkbox:has(:focus-visible) .w-checkbox-input--inputType-custom,
+  .u-body .w-radio:has(:focus-visible) .w-form-formradioinput--inputType-custom {
+    outline-color: var(--theme--text);
+    outline-width: var(--focus--width);
+    outline-style: solid;
+  }
+
+  .u-body .w-checkbox-input--inputType-custom.w--redirected-focus,
+  .u-body .w-form-formradioinput--inputType-custom.w--redirected-focus {
+    box-shadow: none;
+  }
+
+  .u-block-gap {
+    --gap: var(--content-space--button-group-gap);
+    --gap-x: var(--gap);
+    --gap-y: var(--gap);
+  }
+  .u-block-gap > * {
+    margin-inline: calc(var(--gap-x) / 2);
+    margin-top: var(--gap-y);
+    vertical-align: inherit;
+  }
+  :where(.u-block-gap > *) {
+    display: inline-block;
+  }
+  .u-block-gap::before {
+    content: "";
+    display: block;
+    margin-bottom: calc(var(--gap-y) * -1);
+  }
+
+  .u-block-gap-vertical {
+    --gap: 0;
+    --margin: var(--gap);
+  }
+  .u-block-gap-vertical > * {
+    margin-top: var(--margin);
+    margin-bottom: 0;
+  }
+
+  [data-attribute-mb=0] { margin-top: 0; }
+  [data-attribute-mb=1] { margin-top: var(--space--1); }
+
+  [data-attribute-mt=0] { margin-bottom: 0; }
+  [data-attribute-mb=2] { margin-bottom: var(--space--2); }
+
+  .u-gap-0 { --gap: 0; }
+  .u-gap-1 { --gap: var(--space--1); }
+  .u-gap-2 { --gap: var(--space--2); }
+  .u-gap-3 { --gap: var(--space--3); }
+  .u-gap-4 { --gap: var(--space--4); }
+  .u-gap-5 { --gap: var(--space--5); }
+  .u-gap-6 { --gap: var(--space--6); }
+  .u-gap-7 { --gap: var(--space--7); }
+  .u-gap-8 { --gap: var(--space--8); }
+  .u-gap-9 { --gap: var(--space--9); }
+  .u-gap-10 { --gap: var(--space--10); }
+  .u-gap-11 { --gap: var(--space--11); }
+  .u-gap-12 { --gap: var(--space--12); }
+  .u-gap-gutter { --gap: var(--site--gutter); }
+  .u-gap-row-0 { --gap-y: 0; }
+  .u-gap-row-1 { --gap-y: var(--space--1); }
+  .u-gap-row-2 { --gap-y: var(--space--2); }
+  .u-gap-row-3 { --gap-y: var(--space--3); }
+  .u-gap-row-4 { --gap-y: var(--space--4); }
+  .u-gap-row-5 { --gap-y: var(--space--5); }
+  .u-gap-row-6 { --gap-y: var(--space--6); }
+  .u-gap-row-7 { --gap-y: var(--space--7); }
+  .u-gap-row-8 { --gap-y: var(--space--8); }
+  .u-gap-row-9 { --gap-y: var(--space--9); }
+  .u-gap-row-10 { --gap-y: var(--space--10); }
+  .u-gap-row-11 { --gap-y: var(--space--11); }
+  .u-gap-row-12 { --gap-y: var(--space--12); }
+  .u-gap-row-gutter { --gap-y: var(--site--gutter); }
+
+  .u-child-contain > * {
+    display: inline-block;
+    width: 100%;
+    max-width: inherit;
+    margin-top: 0;
+  }
+
+  .u-text-margin-none :is([class*="u-text-style-"],h1,h2,h3,h4,h5,h6,p) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  [data-padding-top="none"] { padding-top: var(--section-space--none); }
+  [data-padding-bottom="none"] { padding-bottom: var(--section-space--none); }
+
+  [data-padding-top="even"] { padding-top: var(--site--margin); }
+  [data-padding-bottom="even"] { padding-bottom: var(--site--margin); }
+
+  [data-padding-top="tiny"] { padding-top: var(--section-space--tiny); }
+  [data-padding-bottom="tiny"] { padding-bottom: var(--section-space--tiny); }
+
+  [data-padding-top="small"] { padding-top: var(--section-space--small); }
+  [data-padding-bottom="small"] { padding-bottom: var(--section-space--small); }
+
+  [data-padding-top="main"] { padding-top: var(--section-space--main); }
+  [data-padding-bottom="main"] { padding-bottom: var(--section-space--main); }
+
+  [data-padding-top="large"] { padding-top: var(--section-space--large); }
+  [data-padding-bottom="large"] { padding-bottom: var(--section-space--large); }
+
+  .wf-design-mode .g_clickable_wrap {
+    z-index: 0 !important;
+  }
+  .g_clickable_wrap a[href="#"] {
+    display: none;
+  }
+  .g_clickable_wrap a[href="#"] ~ button {
+    display: block;
+  }
+
+  .u-hide {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 991px) {
+    .u-hide-tablet {
+      display: none !important;
+    }
+    .u-show-tablet {
+      display: block !important;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .u-hide-mobile-landscape {
+      display: none !important;
+    }
+    .u-show-mobile-landscape {
+      display: block !important;
+    }
+  }
+
+  @media screen and (max-width: 479px) {
+    .u-hide-mobile {
+      display: none !important;
+    }
+    .u-show-mobile-portrait {
+      display: block !important;
+    }
+  }
+  
+    /* Selection and Scrollbar */
+  ::selection{
+    background: var(--swatch--brand);
+    color: var(--swatch--dark);
+  }
+  ::-webkit-scrollbar {
+    width:4px;
+    border-radius: var(--radius--round);
+  }
+  ::-webkit-scrollbar-track {
+    background:var(--swatch--light);
+    border-radius: var(--radius--round);
+  }
+  ::-webkit-scrollbar-thumb {
+    background:var(--swatch--dark);
+    border-radius: var(--radius--round);
+  }
+
+</style></div><div class="page_code_color w-embed"><!-- No theme Style -->
+<style>
+  /* button primary */
+  [data-button-style="primary"] {
+    --button--background: var(--swatch--brand); 
+    --button--text: var(--swatch--brand-text);
+    --button--icon: var(--swatch--brand-text);
+    --button--border: var(--swatch--brand);
+    --button--background-hover: var(--swatch--dark);
+    --button--text-hover: var(--swatch--light);
+    --button--icon-hover: var(--swatch--brand-text);
+    --button--border-hover: var(--swatch--dark);
+  }
+  /* button secondary */
+  [data-button-style="secondary"] {
+    --button--background: var(--swatch--transparent);
+    --button--text: var(--swatch--dark);
+    --button--icon: var(--swatch--dark);
+    --button--border: var(--swatch--dark-faded);
+    --button--background-hover: var(--swatch--dark);
+    --button--text-hover: var(--swatch--light);
+    --button--icon-hover: var(--swatch--dark);
+    --button--border-hover: var(--swatch--dark);
+  }
+  /* button text primary */
+  [data-button-text-style="primary"] {
+    --button-text--text: var(--swatch--dark);
+    --button-text--icon: var(--swatch--dark);
+    --button-text--text-hover: var(--swatch--dark);
+    --button-text--icon-hover: var(--swatch--dark);
+  }
+  /* button text primary */
+  [data-button-text-style="secondary"] {
+    --button-text--text: var(--swatch--light);
+    --button-text--icon: var(--swatch--light);
+    --button-text--text-hover: var(--swatch--light);
+    --button-text--icon-hover: var(--swatch--light);
+  }
+</style>
+
+
+<!-- Uncomment this if you'd like to use Themes
+<style>
+  /* theme light */
+  :root,
+  [data-theme="light"],
+  [data-theme="dark"] [data-theme="invert"] {
+    --theme--background: var(--swatch--light);
+    --theme--text: var(--swatch--dark);
+    --theme--border: var(--swatch--dark-faded);
+    /* button primary */
+    --button--background: var(--swatch--brand); 
+    --button--text: var(--swatch--brand-text);
+    --button--icon: var(--swatch--brand-text);
+    --button--border: var(--swatch--brand);
+    --button--background-hover: var(--swatch--dark);
+    --button--text-hover: var(--swatch--light);
+    --button--icon-hover: var(--swatch--brand-text);
+    --button--border-hover: var(--swatch--dark);
+    /* button secondary */
+    --button-secondary--background: var(--swatch--transparent);
+    --button-secondary--text: var(--swatch--dark);
+    --button-secondary--icon: var(--swatch--dark);
+    --button-secondary--border: var(--swatch--dark-faded);
+    --button-secondary--background-hover: var(--swatch--dark);
+    --button-secondary--text-hover: var(--swatch--light);
+    --button-secondary--icon-hover: var(--swatch--dark);
+    --button-secondary--border-hover: var(--swatch--dark);
+    /* button text primary */
+    --button-text--text: var(--swatch--dark);
+    --button-text--icon: var(--swatch--dark);
+    --button-text--text-hover: var(--swatch--dark);
+    --button-text--icon-hover: var(--swatch--dark);
+  }
+
+  /* theme dark */
+  [data-theme="dark"],
+  [data-theme="invert"],
+  [data-theme="light"] [data-theme="invert"] {
+    --theme--background: var(--swatch--dark);
+    --theme--text: var(--swatch--light);
+    --theme--border: var(--swatch--light-faded);
+    /* button primary */
+    --button--background: var(--swatch--brand);
+    --button--text: var(--swatch--brand-text);
+    --button--border: var(--swatch--brand);
+    --button--background-hover: var(--swatch--light);
+    --button--text-hover: var(--swatch--dark);
+    --button--border-hover: var(--swatch--light);
+    /* button secondary */
+    --button-secondary--background: var(--swatch--transparent);
+    --button-secondary--text: var(--swatch--light);
+    --button-secondary--border: var(--swatch--light-faded);
+    --button-secondary--background-hover: var(--swatch--light);
+    --button-secondary--text-hover: var(--swatch--dark);
+    --button-secondary--border-hover: var(--swatch--light);
+    /* button text primary */
+    --button-text--text: var(--swatch--light);
+    --button-text--icon: var(--swatch--light);
+    --button-text--text-hover: var(--swatch--light);
+    --button-text--icon-hover: var(--swatch--light);
+  }
+
+  /* button secondary */
+  [data-button-style="secondary"] {
+    --button--background: var(--button-secondary--background);
+    --button--text: var(--button-secondary--text);
+    --button--border: var(--button-secondary--border);
+    --button--background-hover: var(--button-secondary--background-hover);
+    --button--text-hover: var(--button-secondary--text-hover);
+    --button--border-hover: var(--button-secondary--border-hover);
+  }
+
+  /* apply colors */
+  :is(c, :where([data-theme]:not([data-theme="inherit"]))) {
+    background-color: var(--theme--background);
+    color: var(--theme--text);
+  }
+</style>
+--></div><div class="page_code_responsive w-embed"><style>
+  /* https://fluidbuilder.webflow.io/?design=90&max=90&min=20&f&g=--site--margin,3,1_--size--2rem,2,1.75_--size--2-5rem,2.5,2_--size--3rem,3,2.25_--size--3-5rem,3.5,2.375_--size--4rem,4,2.5_--size--4-5rem,4.5,2.75_--size--5rem,5,3_--size--5-5rem,5.5,3.25_--size--6rem,6,3.5_--size--6-5rem,6.5,3.75_--size--7rem,7,4_--size--7-5rem,7.5,4.25_--size--8rem,8,4.5_--size--8-5rem,8.5,4.75_--size--9rem,9,5_--size--9-5rem,9.5,5.25_--size--10rem,10,5.5_--size--11rem,11,5.75_--size--12rem,12,6_--size--13rem,13,6.5_--size--14rem,14,7_--size--15rem,15,7.5_--size--16rem,16,8 */
+  :root {
+    /* Size */
+    --size--2rem: clamp(1.75rem, 1.678rem + 0.36vw, 2rem);
+    --size--2-5rem: clamp(2rem, 1.858rem + 0.71vw, 2.5rem);
+    --size--3rem: clamp(2.25rem, 2.036rem + 1.07vw, 3rem);
+    --size--3-5rem: clamp(2.375rem, 2.053rem + 1.61vw, 3.5rem);
+    --size--4rem: clamp(2.5rem, 2.072rem + 2.14vw, 4rem);
+    --size--4-5rem: clamp(2.75rem, 2.25rem + 2.5vw, 4.5rem);
+    --size--5rem: clamp(3rem, 2.428rem + 2.86vw, 5rem);
+    --size--5-5rem: clamp(3.25rem, 2.608rem + 3.21vw, 5.5rem);
+    --size--6rem: clamp(3.5rem, 2.786rem + 3.57vw, 6rem);
+    --size--6-5rem: clamp(3.75rem, 2.964rem + 3.93vw, 6.5rem);
+    --size--7rem: clamp(4rem, 3.142rem + 4.29vw, 7rem);
+    --size--7-5rem: clamp(4.25rem, 3.322rem + 4.64vw, 7.5rem);
+    --size--8rem: clamp(4.5rem, 3.5rem + 5vw, 8rem);
+    --size--8-5rem: clamp(4.75rem, 3.678rem + 5.36vw, 8.5rem);
+    --size--9rem: clamp(5rem, 3.858rem + 5.71vw, 9rem);
+    --size--9-5rem: clamp(5.25rem, 4.036rem + 6.07vw, 9.5rem);
+    --size--10rem: clamp(5.5rem, 4.214rem + 6.43vw, 10rem);
+    --size--11rem: clamp(5.75rem, 4.25rem + 7.5vw, 11rem);
+    --size--12rem: clamp(6rem, 4.286rem + 8.57vw, 12rem);
+    --size--13rem: clamp(6.5rem, 4.642rem + 9.29vw, 13rem);
+    --size--14rem: clamp(7rem, 5rem + 10vw, 14rem);
+    --size--15rem: clamp(7.5rem, 5.358rem + 10.71vw, 15rem);
+    --size--16rem: clamp(8rem, 5.714rem + 11.43vw, 16rem);
+
+    /* Margin, Gutter and Section Padding */
+    --section-space--tiny: clamp(1.5rem, 1.072rem + 2.14vw, 3rem);
+    --section-space--small: clamp(3rem, 2.786rem + 1.07vw, 3.75rem);
+    --section-space--main: clamp(3.75rem, 3.75rem + 0vw, 3.75rem);
+    --section-space--large: clamp(3.75rem, 2.678rem + 5.36vw, 7.5rem);
+    --display-large--font-size: clamp(5rem, 4.428rem + 2.86vw, 7rem);
+    --display-small--font-size: clamp(3.5rem, 2.786rem + 3.57vw, 6rem);
+    --h1--font-size: clamp(3.5rem, 3.072rem + 2.14vw, 5rem);
+    --h2--font-size: clamp(3rem, 2.714rem + 1.43vw, 4rem);
+    --h3--font-size: clamp(3rem, 3rem + 0vw, 3rem);
+    --h4--font-size: clamp(2rem, 1.858rem + 0.71vw, 2.5rem);
+    --h5--font-size: clamp(1.5rem, 1.358rem + 0.71vw, 2rem);
+    --h6--font-size: clamp(1.25rem, 1.178rem + 0.36vw, 1.5rem);
+    --text-xlarge--font-size: clamp(1.5rem, 1.358rem + 0.71vw, 2.25rem);
+    --text-large--font-size: clamp(1.25rem, 1.178rem + 0.36vw, 2rem);
+    --text-medium--font-size: clamp(1.125rem, 1.089rem + 0.18vw, 1.25rem);
+    --text-large-small--font-size: clamp(1.25rem, 1.089rem + 0.18vw, 1.5rem);
+  }
+</style></div><div class="page_code_animations w-embed"><style>
+
+  /* Hover Animations */
+  @media (pointer: fine) {
+
+    /* Nav link */
+    .nav_links_link:hover {font-weight: 600;}
+
+    /* CTA Section */
+    .cta_button_wrap:hover .cta_button_contain {padding-left: 0.75rem; padding-right: 0.75rem;}
+    .cta_button_wrap:hover {color: var(--swatch--light); background-color: var(--swatch--dark);}
+    .cta_social_item_wrap:hover {color: var(--swatch--light); background-color: var(--swatch--dark); border-radius: var(--radius--main);}
+
+    /* Button Full */
+    .g_button_wrap:hover {padding-left: 2rem; padding-right: 2rem;}
+
+    /* Stats Numbers */
+    .stats_item_wrap:hover .stats_number {transform: scale(1);}
+
+    /* Gallery Item */
+    .gallery_item_wrapper:hover .gallery_item_inner {color: var(--swatch--dark); background-color: var(--swatch--light);}
+    .gallery_item_wrapper:hover {border-radius: var(--radius--main);}
+    .gallery_item_wrapper:hover .gallery_item_text {opacity: 1;}
+
+    /* Small Gallery Item */
+    .swiper_slide_small_visual:hover .swiper_slide_small_body {color: var(--swatch--light); background-color: rgba(0, 0, 0, 0.3);}
+    .swiper_slide_small_visual:hover {border-radius: var(--radius--main);}
+    .swiper_slide_small_visual:hover .swiper_slide_small_text {opacity: 1;}
+
+    /* Next Section */
+    .next_link_wrap:hover .next_link_fill {background-color: var(--swatch--ocean-light);}
+    .next_link2_wrap:hover .next_link2_fill {background-color: var(--swatch--beige-light);}
+
+    .featured_item:hover, .featured_swiper_slide:hover {
+      border-radius: 0rem;
+    }
+
+    [data-button-hover=icon]:hover [data-button-icon] {
+      transform: translate(0px, 150%);
+    }
+    [data-button-hover=icon]:hover [data-button-icon-is2] {
+      transform: translate(0px, 0%);
+    }
+
+  }
+
+  [data-button-icon], [data-button-icon-is2] {
+    transition-property: transform;
+    transition-duration: 300ms;
+    transition-timing-function: ease;
+  }
+  [data-button-icon-is2] {
+    position: absolute;
+    transform: translate(0px, -150%);
+  }
+
+
+  [data-wf--btn-main--variant='black---white-hover'].btn_main_wrap:hover .btn_main_icon {
+    background-color: var(--swatch--dark);
+    color: var(--swatch--light);
+  }
+
+  /* Page Load Animations */
+  @keyframes slideup {
+    from {opacity: 0; transform: translateY(1rem);}
+    to {opacity: 1; transform: translateY(0rem);}
+  }
+
+  @keyframes slidedown {
+    from {opacity: 0; transform: translateY(-100%);}
+    to {opacity: 1; transform: translateY(0%);}
+  }
+
+  @keyframes slideleft {
+    from {opacity: 0; transform: translateX(-100%);}
+    to {opacity: 1; transform: translateY(0%);}
+  }
+
+  @keyframes slideright {
+    from {opacity: 0; transform: translateX(100%);}
+    to {opacity: 1; transform: translateY(0%);}
+  }
+
+  @keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+
+</style></div><div class="page_code_custom w-embed"><style>
+
+  /* Accordion */
+  html:not(.wf-design-mode):not(.w-editor) [data-accordion=item].is-active [data-accordion=line] {
+    transform: rotate(90deg);
+  }
+
+  html:not(.wf-design-mode):not(.w-editor) [data-accordion=line] {
+    transition-property: transform;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
+
+  html:not(.wf-design-mode):not(.w-editor) [data-accordion=body] {
+    max-height: 0px;
+    overflow: hidden;
+    transition-property: all;
+    transition-duration: 600ms;
+    transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
+
+  /* Read more Button */
+  [data-read-more=button] .button_main-icon {
+    transition-property: transform;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
+
+  [data-read-more=button].is-active .read-more { display: none; }
+  [data-read-more=button].is-active .read-less { display: inline; }
+  [data-read-more=button].is-active .button_main-icon { transform: rotate(180deg); }
+
+  html:not(.wf-design-mode):not(.w-editor) [data-read-more=text] {
+    max-height: 0px;
+    overflow: hidden;
+    transition-property: all;
+    transition-duration: 600ms;
+    transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  }
+
+  /* Swiper */
+  .swiper-button-disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+  .swiper-wrapper {
+    transition-timing-function: linear!important;
+  }
+  .swiper-pagination-bullets.swiper-pagination-horizontal {width: auto;}
+
+  /* Split */
+  .lines-wrap {overflow: hidden;}
+
+  [data-nav-space] {padding-top: var(--nav--height);}
+
+
+.u-text-style-h2{
+text-wrap: inherit;
+}
+
+
+</style></div></div>
+<div class="nav_wrap u-body"><div class="u-embed-css w-embed"><style>
+  /* Nav Secondary Style */
+  .nav_component {
+    color: var(--swatch--light);
+    border-color: var(--swatch--light);
+  }
+  .nav_component a:focus-visible,
+  .nav_component button:focus-visible {
+    outline-color: var(--swatch--light);
+  }
+  @media screen and (min-width: 992px) {
+    .nav_component .nav_btn_link:hover {
+      background-color: var(--swatch--light);
+      color: var(--swatch--dark);
+    }
+    .nav_component .nav_logo_wrap:hover {color: var(--swatch--brand);}
+  }
+</style></div><div class="u-embed-css w-embed"><style>
+  :root {
+    --nav--height: 4.5rem;
+  }
+
+  /* Styles */
+  .nav_component a {
+    text-decoration: none;
+  }
+  .nav_component a:focus-visible,
+  .nav_component button:focus-visible {
+    outline-color: var(--swatch--dark);
+  }
+  .nav_dropdown_content ::-webkit-scrollbar-track {
+    background: var(--swatch--dark);
+  }
+  .nav_dropdown_content ::-webkit-scrollbar-thumb {
+    background: var(--swatch--light);
+  }
+  .nav_dropdown_toggle_wrap.is-open .nav_dropdown_svg_desktop {
+    transform: rotateX(180deg) rotateY(0deg) rotateZ(0deg);
+  }
+  .nav_dropdown_toggle_wrap.is-open .nav_dropdown_toggle_line {
+    width: 100%;
+  }
+
+  /* Hover */
+  @media screen and (min-width: 992px) {
+    .nav_dropdown_toggle_wrap:hover .nav_dropdown_toggle_line {width: 100%;}
+    .nav_logo_wrap:hover {color: var(--swatch--light);}
+    .nav_dropdown_toggle_wrap:hover, .nav_menu_link:hover, .nav_dropdown_link_wrap:hover {
+      color: var(--swatch--brand);
+    }
+    .nav_btn_link:hover {
+      background-color: var(--swatch--dark);
+      color: var(--swatch--light);
+    }
+    .nav_component.scrolled .nav_btn_link:hover {
+      background-color: var(--swatch--light);
+      color: var(--swatch--dark);
+    }
+    .nav_component.scrolled .nav_logo_wrap:hover {color: var(--swatch--brand);}
+  }
+
+  /* Scrolled */
+  .nav_component.scrolled a:focus-visible,
+  .nav_component.scrolled button:focus-visible {
+    outline-color: var(--swatch--light);
+  }
+
+  /* Nav Open */
+  .nav_component.open {
+    background-color: var(--swatch--dark);
+    border-color: var(--swatch--dark);
+  }
+  .nav_component.open {
+    color: var(--swatch--light);
+  }
+  .nav_wrap:has(.open) .nav_bg {
+    opacity: 1;
+  }
+  @media screen and (max-width: 992px) {
+    .nav_component.open .nav_btn_toggle_icon1 {
+      opacity: 0;
+    }
+    .nav_component.open .nav_btn_toggle_icon2 {
+      opacity: 1;
+    }
+  }
+
+  /* Dropdown Item Hover */
+  @media (pointer: fine) {
+    .nav_dropdown_item_wrap:hover .nav_dropdown_item_line {
+      width: 100%;
+    }
+    .nav_dropdown_item_wrap:hover .nav_dropdown_item_btn_icon {
+      background-color: var(--swatch--dark);
+      color: var(--swatch--light);
+    }
+    .nav_dropdown_item_wrap:hover .nav_dropdown_item_tag_wrap {
+      background-color: var(--swatch--brand);
+    }
+    .nav_dropdown_item_wrap:hover .nav_dropdown_item_visual_wrap {
+      border-radius: 0.75rem;
+    }
+  }
+</style></div><div class="nav_bg u-position-fixed"></div><div class="nav_component"><div class="nav_contain u-container"><a aria-label="Home Page" id="w-node-_4e0a1f4a-1363-6fe6-0f56-107e07d0fa50-07d0fa4d" href="index.html" class="nav_logo_wrap w-inline-block" style="display:flex;align-items:center;"><img src="https://github.com/user-attachments/assets/24a4b988-098e-411e-969f-314ed768f979" alt="Space4Climate" style="height:2.5rem;width:auto;display:block;"/><span style="font-weight:600;font-size:1.1rem;color:inherit;white-space:nowrap;margin-left:0.5rem;">Space4Climate</span></a><nav id="nav-menu" aria-labelledby="nav-menu-toggle" class="nav_menu_wrap w-node-_4e0a1f4a-1363-6fe6-0f56-107e07d0fa53-07d0fa4d"><div class="nav_menu_mask"><div class="nav_menu_layout"><a href="technology.html" class="nav_menu_link w-inline-block"><div class="nav_menu_text">Technology</div><div class="nav_menu_line"></div></a><div class="nav_dropdown_wrap u-color-inherit"><button aria-label="Solutions Dropdown Toggle" aria-expanded="false" aria-controls="solutions-dropdown-content" id="solutions-dropdown-toggle" aria-haspopup="menu" class="nav_dropdown_toggle_wrap"><div class="nav_dropdown_toggle_layout"><div class="nav_menu_text">Solutions</div><div class="nav_dropdown_svg_desktop w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 11 7" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M1.5 1L5.5 5L9.5 1" stroke="currentColor" stroke-width="1.5"/>
+</svg></div><div class="nav_dropdown_toggle_icon"><div class="nav_dropdown_toggle_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M6.64348 12H17.2501M17.2501 12L11.9468 6.69672M17.2501 12L11.9468 17.3033" stroke="currentColor" stroke-width="0.9375"/>
+</svg></div></div><div class="nav_dropdown_toggle_line"></div></div><div class="nav_menu_line"></div></button><div id="resources-dropdown-content" aria-labelledby="resources-dropdown-toggle" class="nav_dropdown_content"><div class="nav_dropdown_mask"><div class="nav_dropdown_contain u-container"><div class="nav_dropdown_layout is-3-col"><div class="nav_dropdown_column is-3-col"><button aria-label="Back Button" class="nav_dropdown_back_wrap"><div class="nav_dropdown_back_icon"><div class="nav_dropdown_back_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M17.3565 12H6.74992M6.74992 12L12.0532 6.69672M6.74992 12L12.0532 17.3033" stroke="currentColor"/>
+</svg></div></div><div class="nav_dropdown_back_text">Back</div></button><div class="nav_dropdown_label">Industries</div></div><div class="nav_solutions_cms_wrap w-dyn-list"><div role="list" class="nav_dropdown_inner is-3-col w-dyn-items"><div role="listitem" class="nav_dropdown_item_wrap is-large is-outline w-dyn-item"><div class="nav_dropdown_item_visual_wrap"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/International_Space_Station_after_undocking_of_STS-132.jpg/1280px-International_Space_Station_after_undocking_of_STS-132.jpg" loading="lazy" alt="The International Space Station above Earth (NASA)" sizes="100vw" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/International_Space_Station_after_undocking_of_STS-132.jpg/1280px-International_Space_Station_after_undocking_of_STS-132.jpg 500w, https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/International_Space_Station_after_undocking_of_STS-132.jpg/1280px-International_Space_Station_after_undocking_of_STS-132.jpg 800w, https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/International_Space_Station_after_undocking_of_STS-132.jpg/1280px-International_Space_Station_after_undocking_of_STS-132.jpg 1080w, https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/International_Space_Station_after_undocking_of_STS-132.jpg/1280px-International_Space_Station_after_undocking_of_STS-132.jpg 1600w" class="nav_dropdown_item_visual u-cover-absolute"/></div><div class="nav_dropdown_item_body is-large"><div class="nav_dropdown_item_heading">Space</div><p class="nav_dropdown_item_subheading u-text-style-main">Kids are often fascinated by space, but know little about how it works.</p><div class="nav_dropdown_item_btn_wrap is-3-col"><div class="nav_dropdown_item_btn_text">Learn more</div><div class="nav_dropdown_item_btn_icon"><div class="nav_dropdown_item_btn_svg g_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M8.19678 15.75L15.6968 8.25M15.6968 8.25L8.19678 8.25M15.6968 8.25L15.6968 15.75" stroke="currentColor"/>
+</svg></div></div></div><div class="nav_dropdown_item_line"></div></div><div class="g_clickable_wrap u-cover-absolute u-radius-inherit u-zindex-3"><a target="" href="sustainable-building-materials.html" class="g_clickable_link u-cover-absolute u-radius-inherit u-display-block w-inline-block"><span class="g_clickable_text u-sr-only">Go to Space page</span></a><button type="button" class="g_clickable_btn u-cover-absolute u-radius-inherit u-display-none"><span class="g_clickable_text u-sr-only">Go to Space page</span></button></div></div><div role="listitem" class="nav_dropdown_item_wrap is-large is-outline w-dyn-item"><div class="nav_dropdown_item_visual_wrap"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Staring_Down_Hurricane_Florence.jpg/1280px-Staring_Down_Hurricane_Florence.jpg" loading="lazy" alt="Hurricane Florence photographed from the ISS (NASA)" sizes="100vw" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Staring_Down_Hurricane_Florence.jpg/1280px-Staring_Down_Hurricane_Florence.jpg 500w, https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Staring_Down_Hurricane_Florence.jpg/1280px-Staring_Down_Hurricane_Florence.jpg 800w, https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Staring_Down_Hurricane_Florence.jpg/1280px-Staring_Down_Hurricane_Florence.jpg 1080w, https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Staring_Down_Hurricane_Florence.jpg/1280px-Staring_Down_Hurricane_Florence.jpg 1500w" class="nav_dropdown_item_visual u-cover-absolute"/></div><div class="nav_dropdown_item_body is-large"><div class="nav_dropdown_item_heading">Climate</div><p class="nav_dropdown_item_subheading u-text-style-main">We’ll let kids explore what they already know — and learn some too.</p><div class="nav_dropdown_item_btn_wrap is-3-col"><div class="nav_dropdown_item_btn_text">Learn more</div><div class="nav_dropdown_item_btn_icon"><div class="nav_dropdown_item_btn_svg g_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M8.19678 15.75L15.6968 8.25M15.6968 8.25L8.19678 8.25M15.6968 8.25L15.6968 15.75" stroke="currentColor"/>
+</svg></div></div></div><div class="nav_dropdown_item_line"></div></div><div class="g_clickable_wrap u-cover-absolute u-radius-inherit u-zindex-3"><a target="" href="education-fuelled initiatives.html" class="g_clickable_link u-cover-absolute u-radius-inherit u-display-block w-inline-block"><span class="g_clickable_text u-sr-only">Go to Climate page</span></a><button type="button" class="g_clickable_btn u-cover-absolute u-radius-inherit u-display-none"><span class="g_clickable_text u-sr-only">Go to Climate page</span></button></div></div><div role="listitem" class="nav_dropdown_item_wrap is-large is-outline w-dyn-item"><div class="nav_dropdown_item_visual_wrap"><img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1280&q=80" loading="lazy" alt="Film-making clapperboard on a shoot" sizes="100vw" srcset="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1280&q=80 500w, https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1280&q=80 800w, https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1280&q=80 1080w, https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1280&q=80 1344w" class="nav_dropdown_item_visual u-cover-absolute"/></div><div class="nav_dropdown_item_body is-large"><div class="nav_dropdown_item_heading">Film-making</div><p class="nav_dropdown_item_subheading u-text-style-main">Mobiles are powerful tools. What if you can do amazing things with them?</p><div class="nav_dropdown_item_btn_wrap is-3-col"><div class="nav_dropdown_item_btn_text">Learn more</div><div class="nav_dropdown_item_btn_icon"><div class="nav_dropdown_item_btn_svg g_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M8.19678 15.75L15.6968 8.25M15.6968 8.25L8.19678 8.25M15.6968 8.25L15.6968 15.75" stroke="currentColor"/>
+</svg></div></div></div><div class="nav_dropdown_item_line"></div></div><div class="g_clickable_wrap u-cover-absolute u-radius-inherit u-zindex-3"><a target="" href="carbon-sequestration.html" class="g_clickable_link u-cover-absolute u-radius-inherit u-display-block w-inline-block"><span class="g_clickable_text u-sr-only">Go to Film-making page</span></a><button type="button" class="g_clickable_btn u-cover-absolute u-radius-inherit u-display-none"><span class="g_clickable_text u-sr-only">Go to Film-making page</span></button></div></div></div></div></div></div><div class="nav_dropdown_fill u-cover-absolute"></div></div></div></div><div class="nav_dropdown_wrap u-color-inherit"><button aria-label="About us Dropdown Toggle" aria-expanded="false" aria-controls="company-dropdown-content" id="company-dropdown-toggle" aria-haspopup="menu" class="nav_dropdown_toggle_wrap"><div class="nav_dropdown_toggle_layout"><div class="nav_menu_text">About us</div><div class="nav_dropdown_svg_desktop w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 11 7" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M1.5 1L5.5 5L9.5 1" stroke="currentColor" stroke-width="1.5"/>
+</svg></div><div class="nav_dropdown_toggle_icon"><div class="nav_dropdown_toggle_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M6.64348 12H17.2501M17.2501 12L11.9468 6.69672M17.2501 12L11.9468 17.3033" stroke="currentColor" stroke-width="0.9375"/>
+</svg></div></div><div class="nav_dropdown_toggle_line"></div></div><div class="nav_menu_line"></div></button><div id="resources-dropdown-content" aria-labelledby="company-dropdown-toggle" class="nav_dropdown_content"><div class="nav_dropdown_mask"><div class="nav_dropdown_contain u-container"><div class="nav_dropdown_layout"><div class="nav_dropdown_column"><button aria-label="Back Button" class="nav_dropdown_back_wrap"><div class="nav_dropdown_back_icon"><div class="nav_dropdown_back_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M17.3565 12H6.74992M6.74992 12L12.0532 6.69672M6.74992 12L12.0532 17.3033" stroke="currentColor"/>
+</svg></div></div><div class="nav_dropdown_back_text">Back</div></button><div class="nav_dropdown_label">Company</div><a href="about.html" class="nav_dropdown_link_wrap u-color-inherit w-inline-block"><div class="nav_dropdown_link_text">About</div><div class="nav_dropdown_link_line"></div></a><a href="programs.html" class="nav_dropdown_link_wrap u-color-inherit w-inline-block"><div class="nav_dropdown_link_text">Programs</div><div class="nav_dropdown_link_line"></div></a><a href="careers.html" class="nav_dropdown_link_wrap u-color-inherit w-inline-block"><div class="nav_dropdown_link_text">Volunteer Roles</div><div class="nav_dropdown_link_line"></div></a></div><div class="nav_dropdown_inner"><div class="nav_dropdown_item_wrap"><div class="nav_dropdown_item_cms w-dyn-list"><div role="list" class="w-dyn-items"><div role="listitem" class="nav_dropdown_item_wrap2 w-dyn-item"><div class="nav_dropdown_item_visual_wrap"><img src="https://images.pexels.com/photos/4145153/pexels-photo-4145153.jpeg?auto=compress&cs=tinysrgb&w=1280" loading="lazy" alt="A student joining an online class" sizes="100vw" srcset="https://images.pexels.com/photos/4145153/pexels-photo-4145153.jpeg?auto=compress&cs=tinysrgb&w=1280 500w, https://images.pexels.com/photos/4145153/pexels-photo-4145153.jpeg?auto=compress&cs=tinysrgb&w=1280 800w, https://images.pexels.com/photos/4145153/pexels-photo-4145153.jpeg?auto=compress&cs=tinysrgb&w=1280 1080w, https://images.pexels.com/photos/4145153/pexels-photo-4145153.jpeg?auto=compress&cs=tinysrgb&w=1280 1200w" class="nav_dropdown_item_visual u-cover-absolute"/></div><div class="nav_dropdown_item_body"><div class="nav_dropdown_item_tag_wrap"><div class="nav_dropdown_item_tag_circle"></div><div class="nav_dropdown_item_tag_text">Thoughts</div></div><div class="nav_dropdown_item_heading">Our story: building a volunteer-powered movement for climate literacy through space storytelling</div><div class="nav_dropdown_item_btn_wrap"><div class="nav_dropdown_item_btn_text">Read more</div><div class="nav_dropdown_item_btn_icon"><div class="nav_dropdown_item_btn_svg g_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M8.19678 15.75L15.6968 8.25M15.6968 8.25L8.19678 8.25M15.6968 8.25L15.6968 15.75" stroke="currentColor"/>
+</svg></div></div></div><div class="nav_dropdown_item_line"></div></div><div class="g_clickable_wrap u-cover-absolute u-radius-inherit u-zindex-3"><a target="" href="news/our-story.html" class="g_clickable_link u-cover-absolute u-radius-inherit u-display-block w-inline-block"><span class="g_clickable_text u-sr-only">Building a volunteer-powered movement for climate literacy through space storytelling</span></a><button type="button" class="g_clickable_btn u-cover-absolute u-radius-inherit u-display-none"><span class="g_clickable_text u-sr-only">Building a volunteer-powered movement for climate literacy through space storytelling</span></button></div></div></div></div></div><div class="nav_dropdown_line"></div><div class="nav_dropdown_item_wrap"><div class="nav_dropdown_item_visual_wrap"><img src="https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=1280" loading="lazy" alt="School students in a classroom with a globe" class="nav_dropdown_item_visual u-cover-absolute"/></div><div class="nav_dropdown_item_body"><div class="nav_dropdown_item_tag_wrap"><div class="nav_dropdown_item_tag_circle"></div><div class="nav_dropdown_item_tag_text">Reports</div></div><div class="nav_dropdown_item_heading">Space4Climate Community Impact 2026 | Space4Climate</div><div class="nav_dropdown_item_btn_wrap"><div class="nav_dropdown_item_btn_text">Read more</div><div class="nav_dropdown_item_btn_icon"><div class="nav_dropdown_item_btn_svg g_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M8.19678 15.75L15.6968 8.25M15.6968 8.25L8.19678 8.25M15.6968 8.25L15.6968 15.75" stroke="currentColor"/>
+</svg></div></div></div><div class="nav_dropdown_item_line"></div></div><div class="g_clickable_wrap u-cover-absolute u-radius-inherit u-zindex-3"><a target="" href="https://www.reports.space4climate.org/daction-2025" class="g_clickable_link u-cover-absolute u-radius-inherit u-display-block w-inline-block"><span class="g_clickable_text u-sr-only">View climate storytelling and digital learning programs</span></a><button type="button" class="g_clickable_btn u-cover-absolute u-radius-inherit u-display-none"><span class="g_clickable_text u-sr-only">View climate storytelling and digital learning programs</span></button></div></div></div></div></div><div class="nav_dropdown_fill u-cover-absolute"></div></div></div></div><div class="nav_dropdown_wrap u-color-inherit"><button aria-label="Resources Dropdown Toggle" aria-expanded="false" aria-controls="resources-dropdown-content" id="resources-dropdown-toggle" aria-haspopup="menu" class="nav_dropdown_toggle_wrap"><div class="nav_dropdown_toggle_layout"><div class="nav_menu_text">Resources</div><div class="nav_dropdown_svg_desktop w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 11 7" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M1.5 1L5.5 5L9.5 1" stroke="currentColor" stroke-width="1.5"/>
+</svg></div><div class="nav_dropdown_toggle_icon"><div class="nav_dropdown_toggle_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M6.64348 12H17.2501M17.2501 12L11.9468 6.69672M17.2501 12L11.9468 17.3033" stroke="currentColor" stroke-width="0.9375"/>
+</svg></div></div><div class="nav_dropdown_toggle_line"></div></div><div class="nav_menu_line"></div></button><div id="resources-dropdown-content" aria-labelledby="resources-dropdown-toggle" class="nav_dropdown_content"><div class="nav_dropdown_mask"><div class="nav_dropdown_contain u-container"><div class="nav_dropdown_layout"><div class="nav_dropdown_column"><button aria-label="Back Button" class="nav_dropdown_back_wrap"><div class="nav_dropdown_back_icon"><div class="nav_dropdown_back_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M17.3565 12H6.74992M6.74992 12L12.0532 6.69672M6.74992 12L12.0532 17.3033" stroke="currentColor"/>
+</svg></div></div><div class="nav_dropdown_back_text">Back</div></button><div class="nav_dropdown_label">Resources</div><a href="case-studies.html" class="nav_dropdown_link_wrap u-color-inherit w-inline-block"><div class="nav_dropdown_link_text">Student Success Stories</div><div class="nav_dropdown_link_line"></div></a><a href="lab-notes.html" class="nav_dropdown_link_wrap u-color-inherit w-inline-block"><div class="nav_dropdown_link_text">Learning Resources</div><div class="nav_dropdown_link_line"></div></a><a href="press.html" class="nav_dropdown_link_wrap u-color-inherit w-inline-block"><div class="nav_dropdown_link_text">Updates</div><div class="nav_dropdown_link_line"></div></a><a href="commonboard.html" class="nav_dropdown_link_wrap u-color-inherit w-inline-block"><div class="nav_dropdown_link_text">Orbit Scheduler</div><div class="nav_dropdown_link_line"></div></a><a href="https://www.reports.space4climate.org/" target="_blank" class="nav_dropdown_link_wrap u-color-inherit w-inline-block"><div class="nav_dropdown_link_text">Reports</div><div class="nav_dropdown_link_line"></div></a></div><div class="nav_dropdown_inner"><div class="nav_dropdown_item_wrap"><div class="nav_dropdown_item_visual_wrap"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/GOES-16_ABI_Full_Disk_%2832440453126%29.jpg/1280px-GOES-16_ABI_Full_Disk_%2832440453126%29.jpg" loading="lazy" sizes="(max-width: 3024px) 100vw, 3024px, 100vw" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/GOES-16_ABI_Full_Disk_%2832440453126%29.jpg/1280px-GOES-16_ABI_Full_Disk_%2832440453126%29.jpg 500w, https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/GOES-16_ABI_Full_Disk_%2832440453126%29.jpg/1280px-GOES-16_ABI_Full_Disk_%2832440453126%29.jpg 800w, https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/GOES-16_ABI_Full_Disk_%2832440453126%29.jpg/1280px-GOES-16_ABI_Full_Disk_%2832440453126%29.jpg 1080w, https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/GOES-16_ABI_Full_Disk_%2832440453126%29.jpg/1280px-GOES-16_ABI_Full_Disk_%2832440453126%29.jpg 3024w" alt="Full-disk Earth image from NOAA GOES-16" class="nav_dropdown_item_visual u-cover-absolute"/></div><div class="nav_dropdown_item_body"><div class="nav_dropdown_item_tag_wrap"><div class="nav_dropdown_item_tag_circle"></div><div class="nav_dropdown_item_tag_text">Case Study</div></div><div class="nav_dropdown_item_heading">Accelerating high-quality space-and-climate education through immersive climate learning programs</div><div class="nav_dropdown_item_btn_wrap"><div class="nav_dropdown_item_btn_text">Read more</div><div class="nav_dropdown_item_btn_icon"><div class="nav_dropdown_item_btn_svg g_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M8.19678 15.75L15.6968 8.25M15.6968 8.25L8.19678 8.25M15.6968 8.25L15.6968 15.75" stroke="currentColor"/>
+</svg></div></div></div><div class="nav_dropdown_item_line"></div></div><div class="g_clickable_wrap u-cover-absolute u-radius-inherit u-zindex-3"><a target="" href="case-studies/deep-sky.html" class="g_clickable_link u-cover-absolute u-radius-inherit u-display-block w-inline-block"><span class="g_clickable_text u-sr-only">Accelerating high-quality space-and-climate education through immersive climate learning programs</span></a><button type="button" class="g_clickable_btn u-cover-absolute u-radius-inherit u-display-none"><span class="g_clickable_text u-sr-only">Accelerating high-quality space-and-climate education through immersive climate learning programs</span></button></div></div><div class="nav_dropdown_line"></div><div class="nav_dropdown_item_wrap"><div class="nav_dropdown_item_visual_wrap"><img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1280&q=80" loading="lazy" sizes="(max-width: 2074px) 100vw, 2074px, 100vw" srcset="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1280&q=80 500w, https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1280&q=80 800w, https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1280&q=80 1080w, https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1280&q=80 1600w, https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1280&q=80 2000w, https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1280&q=80 2074w" alt="Earth from orbit beside a spacecraft" class="nav_dropdown_item_visual u-cover-absolute"/></div><div class="nav_dropdown_item_body"><div class="nav_dropdown_item_tag_wrap"><div class="nav_dropdown_item_tag_circle"></div><div class="nav_dropdown_item_tag_text">Guide</div></div><div class="nav_dropdown_item_heading">Hands-on Space &amp; Climate Workshops for Young Innovators</div><div class="nav_dropdown_item_btn_wrap"><div class="nav_dropdown_item_btn_text">Read more</div><div class="nav_dropdown_item_btn_icon"><div class="nav_dropdown_item_btn_svg g_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M8.19678 15.75L15.6968 8.25M15.6968 8.25L8.19678 8.25M15.6968 8.25L15.6968 15.75" stroke="currentColor"/>
+</svg></div></div></div><div class="nav_dropdown_item_line"></div></div><div class="g_clickable_wrap u-cover-absolute u-radius-inherit u-zindex-3"><a target="" href="direct-air-capture.html" class="g_clickable_link u-cover-absolute u-radius-inherit u-display-block w-inline-block"><span class="g_clickable_text u-sr-only">View climate storytelling and digital learning programs</span></a><button type="button" class="g_clickable_btn u-cover-absolute u-radius-inherit u-display-none"><span class="g_clickable_text u-sr-only">View climate storytelling and digital learning programs</span></button></div></div></div></div></div><div class="nav_dropdown_fill u-cover-absolute"></div></div></div></div><div class="nav_menu_btn_tablet"><a aria-label="Contact Us" href="contact.html" class="nav_btn_link w-inline-block"><div class="nav_btn_text">Contact</div></a></div></div><div class="nav_bottom_wrap"><div class="nav_social_list"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/s4cff/" target="_blank" class="nav_social_link w-inline-block"><div class="w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 64 64" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M22 20.3237C20.8954 20.3237 20 21.2192 20 22.3237V42.3237C20 43.4283 20.8954 44.3237 22 44.3237H42C43.1045 44.3237 44 43.4283 44 42.3237V22.3237C44 21.2192 43.1045 20.3237 42 20.3237H22ZM27.361 25.6607C27.3685 26.9357 26.4141 27.7213 25.2816 27.7157C24.2148 27.7101 23.2848 26.8607 23.2904 25.6626C23.296 24.5357 24.1866 23.6301 25.3435 23.6563C26.5173 23.6826 27.3685 24.5432 27.361 25.6607ZM32.3729 29.3394H29.0129H29.0111V40.7525H32.5623V40.4863C32.5623 39.9797 32.5619 39.4731 32.5615 38.9663C32.5604 37.6145 32.5592 36.2613 32.5661 34.91C32.568 34.5819 32.5829 34.2407 32.6673 33.9275C32.9841 32.7575 34.0361 32.0019 35.2099 32.1876C35.9636 32.3056 36.4623 32.7425 36.6723 33.4532C36.8017 33.8975 36.8599 34.3756 36.8655 34.8388C36.8807 36.2356 36.8785 37.6324 36.8764 39.0293C36.8756 39.5224 36.8748 40.0157 36.8748 40.5088V40.7507H40.4373V40.4769C40.4373 39.8743 40.4371 39.2717 40.4367 38.6692C40.436 37.1632 40.4352 35.6572 40.4392 34.1507C40.4411 33.47 40.368 32.7988 40.2011 32.1407C39.9517 31.1619 39.4361 30.3519 38.598 29.7669C38.0036 29.3507 37.3511 29.0825 36.6217 29.0525C36.5387 29.0491 36.4549 29.0446 36.3708 29.04C35.9979 29.0199 35.6188 28.9994 35.2623 29.0713C34.2423 29.2757 33.3461 29.7425 32.6692 30.5656C32.5905 30.66 32.5136 30.7559 32.3988 30.8989L32.3729 30.9313V29.3394ZM23.5755 40.7563H27.1099V29.3468H23.5755V40.7563Z" fill="currentColor"/>
+</svg></div></a><a aria-label="x" href="https://www.twitter.com/s4cff" target="_blank" class="nav_social_link w-inline-block"><div class="w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 65 64" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <mask id="mask0_5622_8" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="20" y="20" width="25" height="24">
+    <path d="M20.4619 20H44.4619V44H20.4619V20Z" fill="currentColor"/>
+  </mask>
+  <g mask="url(#mask0_5622_8)">
+    <path d="M39.3619 21.1235H43.0425L35.0025 30.3361L44.4619 42.8744H37.0562L31.2516 35.2715L24.6173 42.8744H20.9333L29.5322 33.0172L20.4619 21.1252H28.0562L33.2951 28.0732L39.3619 21.1235ZM38.0676 40.6664H40.1076L26.9419 23.2167H24.7545L38.0676 40.6664Z" fill="currentColor"/>
+  </g>
+</svg></div></a><a aria-label="Bluesky" href="https://bsky.app/profile/space4climate.org" target="_blank" class="nav_social_link w-inline-block"><img src="https://cdn.prod.website-files.com/65b810933000b6b25fd78458/680bb33c8d83a27eab505a80_footer-icon.png" loading="lazy" alt="" class="footer_social_visual u-cover-absolute"/></a></div><div class="footer_bottom_list u-hflex-between-bottom u-gap-3 u-column-7"><div class="footer_copyright">© <span class="copyright-year">2025</span> Space4Climate.  All rights reserved.</div><a href="index.html#" class="footer_legal_link u-color-inherit">Legals</a></div></div></div></nav><div id="w-node-_4e0a1f4a-1363-6fe6-0f56-107e07d0fac5-07d0fa4d" class="nav_btn_wrap"><div class="nav_btn_dekstop"><a href="login.html" class="s4c-login-nav-btn w-inline-block"><div class="nav_btn_text">Log in</div></a><a aria-label="Contact Us" href="contact.html" class="nav_btn_link w-inline-block"><div class="nav_btn_text">Contact</div></a></div><button aria-label="Menu Open" aria-expanded="false" aria-controls="nav-menu" aria-haspopup="menu" id="nav-menu-toggle" class="nav_btn_toggle_wrap"><div class="nav_btn_toggle_icon1 g_svg w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M5.33325 8H26.6666V10.6667H5.33325V8ZM5.33325 14.6667H26.6666V17.3333H5.33325V14.6667ZM5.33325 21.3333H26.6666V24H5.33325V21.3333Z" fill="currentColor"/>
+</svg></div><div class="nav_btn_toggle_icon2 g_svg u-cover-absolute w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 32 32" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 14.585L22.0849 8.00002L23.9706 9.88563L17.3856 16.4706L24 23.085L22.1144 24.9706L15.5 18.3562L8.88562 24.9706L7 23.085L13.6144 16.4706L7.02944 9.88563L8.91506 8.00002L15.5 14.585Z" fill="currentColor"/>
+</svg></div></button></div></div></div><div class="u-embed-js w-embed w-script"><script>
+  pageFunctions.addFunction("navigationBehavior", function () {
+    let lastScrollTop = 30;
+    const scrollThreshold = 30;
+
+    function handleNavigation() {
+      const navComponents = document.querySelectorAll(".nav_component");
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+      navComponents.forEach((nav) => {
+        if (currentScroll > scrollThreshold) {
+          nav.classList.add("scrolled");
+        } else {
+          nav.classList.remove("scrolled");
+          nav.classList.remove("move");
+        }
+      });
+
+      if (currentScroll > scrollThreshold) {
+        navComponents.forEach((nav) => {
+          if (currentScroll > lastScrollTop) nav.classList.add("move");
+          else nav.classList.remove("move");
+        });
+      }
+
+      lastScrollTop = currentScroll <= scrollThreshold ? scrollThreshold : currentScroll;
+    }
+
+    let ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return;
+      window.requestAnimationFrame(function () {
+        handleNavigation();
+        ticking = false;
+      });
+      ticking = true;
+    });
+
+    setTimeout(handleNavigation, 100);
+    handleNavigation();
+    window.addEventListener("load", handleNavigation);
+  });
+
+  function getScrollbarWidth() {
+    const outer = document.createElement("div");
+    outer.style.visibility = "hidden";
+    outer.style.overflow = "scroll";
+    document.body.appendChild(outer);
+
+    const inner = document.createElement("div");
+    outer.appendChild(inner);
+
+    const scrollbarWidth = outer.offsetWidth - inner.offsetWidth;
+    outer.parentNode.removeChild(outer);
+    return scrollbarWidth;
+  }
+
+  // Global state (no cumulative padding bug)
+  window.navigationState = {
+    navMenuOpen: false,
+    openDropdowns: 0,
+    scrollbarWidth: getScrollbarWidth(),
+    _basePaddingRight: null,
+
+    hasOpenElements: function () {
+      return this.navMenuOpen || this.openDropdowns > 0;
+    },
+
+    shouldNavBeOpen: function () {
+      return this.navMenuOpen || this.openDropdowns > 0;
+    },
+
+    _ensureBasePadding: function () {
+      if (this._basePaddingRight == null) {
+        const pr = parseFloat(window.getComputedStyle(document.body).paddingRight) || 0;
+        this._basePaddingRight = pr;
+      }
+    },
+
+    updateState: function () {
+      const navComponent = document.querySelector(".nav_component");
+
+      if (this.hasOpenElements()) {
+        this._ensureBasePadding();
+        document.body.style.paddingRight = this._basePaddingRight + this.scrollbarWidth + "px";
+        document.body.classList.add("u-overflow-hidden");
+      } else {
+        document.body.style.paddingRight = "";
+        document.body.classList.remove("u-overflow-hidden");
+        this._basePaddingRight = null;
+      }
+
+      if (navComponent) {
+        if (this.shouldNavBeOpen()) navComponent.classList.add("open");
+        else navComponent.classList.remove("open");
+      }
+    },
+  };
+
+  pageFunctions.addFunction("navDropdown", function () {
+    const TABLET_BREAKPOINT = 991;
+    let wasMobileOrTablet = window.innerWidth <= TABLET_BREAKPOINT;
+
+    const dropdowns = Array.from(document.querySelectorAll(".nav_dropdown_wrap"));
+
+    // Desktop: one open at a time
+    let activeDesktopDropdown = null;
+    let desktopSwitching = false;
+
+    // Open timing stays like original
+    const OPEN_FILL_DUR = 0.4;
+    const OPEN_CONTENT_DUR = 0.3;
+    const OPEN_CONTENT_DELAY = 0.1;
+
+    // Desktop close (when user closes, not switching): reverse, 50% faster
+    const CLOSE_SPEED_MULT = 0.5;
+
+    function isMobileOrTablet() {
+      return window.innerWidth <= TABLET_BREAKPOINT;
+    }
+    function isDesktop() {
+      return window.innerWidth >= 992;
+    }
+    function safeHasGSAP() {
+      return !!(window.gsap && window.gsap.timeline && window.gsap.set);
+    }
+
+    dropdowns.forEach(initializeDropdown);
+
+    // Click outside
+    document.addEventListener("click", (event) => {
+      document.querySelectorAll(".nav_dropdown_wrap.active").forEach((dd) => {
+        if (dd.contains(event.target)) return;
+        // Desktop: animated close. Mobile: instant close.
+        closeDropdown(dd, { returnFocus: false, mode: isDesktop() ? "animated" : "instant" });
+      });
+    });
+
+    // Escape
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      document.querySelectorAll(".nav_dropdown_wrap.active").forEach((dd) => {
+        closeDropdown(dd, { returnFocus: true, mode: isDesktop() ? "animated" : "instant" });
+      });
+    });
+
+    // Breakpoint flip: close instantly
+    window.addEventListener("resize", function () {
+      const isNowMobileOrTablet = window.innerWidth <= TABLET_BREAKPOINT;
+      if (wasMobileOrTablet !== isNowMobileOrTablet) {
+        document.querySelectorAll(".nav_dropdown_wrap.active").forEach((dd) => closeDropdownImmediately(dd));
+        activeDesktopDropdown = null;
+        desktopSwitching = false;
+        wasMobileOrTablet = isNowMobileOrTablet;
+      }
+    });
+
+    function initializeDropdown(dropdown) {
+      const toggle = dropdown.querySelector(".nav_dropdown_toggle_wrap");
+      const content = dropdown.querySelector(".nav_dropdown_content");
+      const fill = dropdown.querySelector(".nav_dropdown_fill");
+      const contentInner = dropdown.querySelector(".nav_dropdown_contain");
+      const backButton = dropdown.querySelector(".nav_dropdown_back_wrap");
+
+      if (!toggle || !content) return;
+
+      toggle.setAttribute("aria-expanded", "false");
+      content.style.display = "none";
+      if (contentInner) contentInner.style.opacity = "0";
+
+      if (safeHasGSAP() && fill) {
+        gsap.set(fill, { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" });
+      }
+
+      // OPEN animated (original)
+      const openAnimated = () => {
+        if (dropdown._tl && dropdown._tl.kill) dropdown._tl.kill();
+        dropdown._tl = null;
+
+        if (!safeHasGSAP() || !fill || !contentInner) {
+          content.style.display = "block";
+          if (contentInner) contentInner.style.opacity = "1";
+          return null;
+        }
+
+        gsap.set(content, { display: "block" });
+
+        const tl = gsap.timeline();
+        tl.fromTo(
+          fill,
+          { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" },
+          {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            duration: OPEN_FILL_DUR,
+            ease: "power2.inOut",
+          }
+        ).fromTo(
+          contentInner,
+          { opacity: 0 },
+          { opacity: 1, duration: OPEN_CONTENT_DUR, ease: "power2.out" },
+          OPEN_CONTENT_DELAY
+        );
+
+        dropdown._tl = tl;
+        return tl;
+      };
+
+      // OPEN instant (no flash, no gap)
+      const openInstant = () => {
+        if (dropdown._tl && dropdown._tl.kill) dropdown._tl.kill();
+        dropdown._tl = null;
+
+        // Make everything "open" in the same tick
+        content.style.display = "block";
+
+        if (safeHasGSAP() && fill) {
+          gsap.set(fill, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            overwrite: true,
+          });
+        }
+        if (safeHasGSAP() && contentInner) {
+          gsap.set(contentInner, { opacity: 1, overwrite: true });
+        } else if (contentInner) {
+          contentInner.style.opacity = "1";
+        }
+      };
+
+      // CLOSE instant
+      const closeInstant = () => {
+        if (dropdown._tl && dropdown._tl.kill) dropdown._tl.kill();
+        dropdown._tl = null;
+
+        if (safeHasGSAP() && contentInner) {
+          gsap.set(contentInner, { opacity: 0, overwrite: true });
+        } else if (contentInner) {
+          contentInner.style.opacity = "0";
+        }
+
+        content.style.display = "none";
+
+        if (safeHasGSAP() && fill) {
+          gsap.set(fill, {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+            overwrite: true,
+          });
+        }
+      };
+
+      // CLOSE animated (desktop only, when user closes without switching)
+      const closeAnimated = () => {
+        if (dropdown._tl && dropdown._tl.kill) dropdown._tl.kill();
+        dropdown._tl = null;
+
+        if (!safeHasGSAP() || !fill || !contentInner) {
+          if (contentInner) contentInner.style.opacity = "0";
+          content.style.display = "none";
+          return null;
+        }
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            content.style.display = "none";
+          },
+        });
+
+        tl.to(
+          contentInner,
+          { opacity: 0, duration: OPEN_CONTENT_DUR * CLOSE_SPEED_MULT, ease: "power2.in" },
+          0
+        ).to(
+          fill,
+          {
+            clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+            duration: OPEN_FILL_DUR * CLOSE_SPEED_MULT,
+            ease: "power2.inOut",
+          },
+          0
+        );
+
+        dropdown._tl = tl;
+        return tl;
+      };
+
+      // Switch helper (desktop): do NOT touch navigationState counters to avoid nav "open" flicker
+      const switchDesktop = (prevDropdown, nextDropdown) => {
+        if (!prevDropdown || prevDropdown === nextDropdown) return;
+
+        desktopSwitching = true;
+
+        // Close previous visually only (no state update)
+        closeDropdown(prevDropdown, {
+          mode: "instant",
+          returnFocus: false,
+          suppressState: true,
+          skipDesktopPointerClear: true,
+        });
+
+        // Open next visually only (no state update)
+        openDropdown(nextDropdown, {
+          mode: "instant",
+          suppressState: true,
+        });
+
+        activeDesktopDropdown = nextDropdown;
+        desktopSwitching = false;
+      };
+
+      toggle.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        if (desktopSwitching) return;
+
+        const isActive = dropdown.classList.contains("active");
+
+        // Closing itself
+        if (isActive) {
+          closeDropdown(dropdown, { returnFocus: true, mode: isDesktop() ? "animated" : "instant" });
+          if (isDesktop()) activeDesktopDropdown = null;
+          return;
+        }
+
+        // Opening
+        if (isDesktop()) {
+          if (activeDesktopDropdown && activeDesktopDropdown !== dropdown) {
+            // Switch: close instant + open instant, no gap, no nav state flicker
+            switchDesktop(activeDesktopDropdown, dropdown);
+            return;
+          }
+
+          // Nothing open -> open animated
+          openDropdown(dropdown, { mode: "animated" });
+          activeDesktopDropdown = dropdown;
+          return;
+        }
+
+        // Mobile/Tablet:
+        // If any dropdown already open -> open instant, else open animated
+        const anyOpen = window.navigationState.openDropdowns > 0;
+        openDropdown(dropdown, { mode: anyOpen ? "instant" : "animated" });
+      });
+
+      if (backButton) {
+        backButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          closeDropdown(dropdown, { returnFocus: true, mode: isDesktop() ? "animated" : "instant" });
+
+          if (isDesktop() && activeDesktopDropdown === dropdown) activeDesktopDropdown = null;
+        });
+      }
+
+      dropdown.openAnimated = openAnimated;
+      dropdown.openInstant = openInstant;
+      dropdown.closeInstant = closeInstant;
+      dropdown.closeAnimated = closeAnimated;
+    }
+
+    function openDropdown(dropdown, opts) {
+      const options = opts || {};
+      const toggle = dropdown.querySelector(".nav_dropdown_toggle_wrap");
+      if (!toggle) return;
+
+      const mode = options.mode === "instant" ? "instant" : "animated";
+      const suppressState = !!options.suppressState;
+
+      toggle.setAttribute("aria-expanded", "true");
+
+      dropdown.classList.add("active");
+      toggle.classList.add("is-open");
+
+      if (!suppressState) {
+        window.navigationState.openDropdowns++;
+        window.navigationState.updateState();
+      }
+
+      if (mode === "instant") {
+        if (typeof dropdown.openInstant === "function") dropdown.openInstant();
+      } else {
+        if (typeof dropdown.openAnimated === "function") dropdown.openAnimated();
+      }
+
+      // Focus first item (optional)
+      const firstMenuItem = dropdown.querySelector('[role="menuitem"]');
+      if (firstMenuItem) {
+        setTimeout(() => {
+          try {
+            firstMenuItem.focus();
+          } catch (e) {}
+        }, 100);
+      }
+    }
+
+    function closeDropdown(dropdown, options) {
+      const opts = options || {};
+      const toggle = dropdown.querySelector(".nav_dropdown_toggle_wrap");
+      if (!toggle) return null;
+
+      const suppressState = !!opts.suppressState;
+      const mode =
+        opts.mode === "instant"
+          ? "instant"
+          : opts.mode === "animated"
+          ? "animated"
+          : isDesktop()
+          ? "animated"
+          : "instant";
+
+      toggle.setAttribute("aria-expanded", "false");
+
+      dropdown.classList.remove("active");
+      toggle.classList.remove("is-open");
+
+      if (!suppressState) {
+        window.navigationState.openDropdowns = Math.max(0, window.navigationState.openDropdowns - 1);
+        window.navigationState.updateState();
+      }
+
+      if (mode === "animated" && isDesktop()) {
+        if (typeof dropdown.closeAnimated === "function") dropdown.closeAnimated();
+        else {
+          const content = dropdown.querySelector(".nav_dropdown_content");
+          if (content) content.style.display = "none";
+        }
+      } else {
+        if (typeof dropdown.closeInstant === "function") dropdown.closeInstant();
+        else {
+          const content = dropdown.querySelector(".nav_dropdown_content");
+          if (content) content.style.display = "none";
+        }
+      }
+
+      if (isDesktop() && !opts.skipDesktopPointerClear) {
+        if (activeDesktopDropdown === dropdown) activeDesktopDropdown = null;
+      }
+
+      if (opts.returnFocus) {
+        try {
+          toggle.focus();
+        } catch (e) {}
+      }
+
+      return null;
+    }
+
+    function closeDropdownImmediately(dropdown) {
+      const toggle = dropdown.querySelector(".nav_dropdown_toggle_wrap");
+      const content = dropdown.querySelector(".nav_dropdown_content");
+      const fill = dropdown.querySelector(".nav_dropdown_fill");
+      const contentInner = dropdown.querySelector(".nav_dropdown_contain");
+
+      if (dropdown._tl && dropdown._tl.kill) dropdown._tl.kill();
+      dropdown._tl = null;
+
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
+
+      dropdown.classList.remove("active");
+      if (toggle) toggle.classList.remove("is-open");
+
+      window.navigationState.openDropdowns = Math.max(0, window.navigationState.openDropdowns - 1);
+      window.navigationState.updateState();
+
+      if (safeHasGSAP() && contentInner) gsap.set(contentInner, { opacity: 0, overwrite: true });
+      else if (contentInner) contentInner.style.opacity = "0";
+
+      if (content) content.style.display = "none";
+
+      if (safeHasGSAP() && fill) {
+        gsap.set(fill, {
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+          overwrite: true,
+        });
+      }
+    }
+  });
+
+  pageFunctions.addFunction("navMenu", function () {
+    const navToggle = document.querySelector(".nav_btn_toggle_wrap");
+    const navComponent = document.querySelector(".nav_component");
+    if (!navToggle || !navComponent) return;
+
+    const menuWrap = navComponent.querySelector(".nav_menu_wrap");
+    const menuMask = navComponent.querySelector(".nav_menu_mask");
+    const TABLET_BREAKPOINT = 991;
+
+    function isMobileOrTablet() {
+      return window.innerWidth <= TABLET_BREAKPOINT;
+    }
+
+    function initializeMenu() {
+      if (isMobileOrTablet()) {
+        if (!navComponent.classList.contains("open")) menuWrap.style.display = "none";
+      } else {
+        menuWrap.style.display = "";
+        menuWrap.style.clipPath = "";
+        menuMask.style.opacity = "";
+      }
+    }
+
+    initializeMenu();
+
+    const openAnimation = () => {
+      if (!isMobileOrTablet()) return;
+
+      gsap.set(menuWrap, { display: "block" });
+
+      const tl = gsap.timeline();
+      tl.fromTo(
+        menuWrap,
+        { clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)" },
+        {
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+          duration: 0.4,
+          ease: "power2.inOut",
+          delay: 0.15,
+        }
+      ).fromTo(menuMask, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0.35);
+
+      return tl;
+    };
+
+    const closeAnimation = () => {
+      if (!isMobileOrTablet()) return;
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          menuWrap.style.display = "none";
+        },
+      });
+
+      tl.to(menuMask, { opacity: 0, duration: 0.2, ease: "power2.in" }).to(
+        menuWrap,
+        {
+          clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
+          duration: 0.3,
+          ease: "power2.inOut",
+        },
+        0
+      );
+
+      return tl;
+    };
+
+    function toggleMenu() {
+      if (!isMobileOrTablet()) return;
+
+      const isExpanded = navToggle.getAttribute("aria-expanded") === "true";
+      navToggle.setAttribute("aria-expanded", String(!isExpanded));
+
+      if (isExpanded) {
+        closeAnimation();
+        window.navigationState.navMenuOpen = false;
+        window.navigationState.updateState();
+      } else {
+        openAnimation();
+        window.navigationState.navMenuOpen = true;
+        window.navigationState.updateState();
+      }
+    }
+
+    navToggle.addEventListener("click", function (event) {
+      event.preventDefault();
+      if (isMobileOrTablet()) toggleMenu();
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (isMobileOrTablet() && event.key === "Escape" && navComponent.classList.contains("open")) {
+        toggleMenu();
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      if (
+        isMobileOrTablet() &&
+        navComponent.classList.contains("open") &&
+        !navComponent.contains(event.target) &&
+        event.target !== navToggle &&
+        !navToggle.contains(event.target)
+      ) {
+        toggleMenu();
+      }
+    });
+
+    window.addEventListener("resize", function () {
+      window.navigationState.scrollbarWidth = getScrollbarWidth();
+      initializeMenu();
+
+      if (!isMobileOrTablet()) {
+        if (window.navigationState.navMenuOpen) {
+          window.navigationState.navMenuOpen = false;
+          window.navigationState.updateState();
+          navToggle.setAttribute("aria-expanded", "false");
+        }
+      }
+    });
+  });
+</script></div></div>
+
+<main id="main" class="page_main">
+  <section class="section-video-hero" data-video-id="5281">
+    <video class="iframe home" autoplay muted loop playsinline poster="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/1280px-The_Earth_seen_from_Apollo_17.jpg" title="Earth from the International Space Station (NASA)" style="width:100%;height:100%;object-fit:cover" width="100%" height="100vh"><source src="https://archive.org/download/NASA-Ultra-High-Definition/Earthview%201%20-%204k%20ISS%20Earth%20View.mp4#t=10" type="video/mp4"><source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a7/View_of_Planet_Earth_%284K%29.webm/View_of_Planet_Earth_%284K%29.webm.720p.vp9.webm" type="video/webm"></video>
+    <div class="hero-overlay home">
+      <div class="centered-container home-hero">
+        <h1 class="home-hero-title">How the scheduler works</h1>
+        <p class="paragraph-large home-hero">Launch a board, share the link, mark when you are free, then book the overlap.</p>
+        <a href="commonboard.html" class="button-outline margin-top-small w-inline-block">
+          <div>Launch a board</div>
+          <div class="button-arrow-wrapper-2 light"><img src="https://cdn.prod.website-files.com/65b810933000b6b25fd78458/65c40274b6ed92166e3c2b4e_arrow.svg" loading="eager" alt="" class="image"></div>
+        </a>
+      </div>
+      <img src="https://cdn.prod.website-files.com/65b810933000b6b25fd78458/65e903534bf3b569d9b27ada_darkmaskspaced.svg" loading="eager" alt="" class="home-hero-mask-img">
     </div>
-  </nav>
-
-  <main>
-    <!-- Hero -->
-    <div class="hero">
-      <div class="hero-badge">User Guide</div>
-      <h1>Orbit Scheduler<br>How it works</h1>
-      <p>Everything you need to know about creating boards, marking your availability, and finding the perfect meeting time for your Space4Climate team.</p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="/commonboard.html">Launch Orbit Scheduler</a>
-        <a class="btn btn-outline" href="/index.html">Back to site</a>
+  </section>
+  <section class="section home-intro">
+    <div class="container-medium home-vid">
+      <div class="w-layout-grid _2-col-grid home-vid">
+        <div class="grid-block relative">
+          <div style="width:100%;height:100%;overflow:hidden;min-height:28rem" class="div-5">
+            <video class="iframe" autoplay muted loop playsinline poster="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/1280px-The_Earth_seen_from_Apollo_17.jpg" title="Earth from the International Space Station (NASA)" style="width:100%;height:100%;overflow:hidden;min-height:28rem;object-fit:cover" width="100%" height="100%"><source src="https://archive.org/download/NASA-Ultra-High-Definition/Earthview%201%20-%204k%20ISS%20Earth%20View.mp4#t=10" type="video/mp4"><source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/a/a7/View_of_Planet_Earth_%284K%29.webm/View_of_Planet_Earth_%284K%29.webm.720p.vp9.webm" type="video/webm"></video>
+          </div>
+        </div>
+        <div class="grid-block">
+          <h2 class="max-width-small">Four steps. One overlapping hour.</h2>
+          <p>Launch a board, share the link, mark when you are free, then book. No accounts.</p>
+          <a href="commonboard.html" class="button-outline margin-top-small w-inline-block">
+            <div>Launch a board</div>
+            <div class="button-arrow-wrapper-2 light"><img src="https://cdn.prod.website-files.com/65b810933000b6b25fd78458/65c40274b6ed92166e3c2b4e_arrow.svg" alt="" class="image"></div>
+          </a>
+        </div>
       </div>
     </div>
+  </section>
 
+  <div class="orbit-guide" style="padding-top:4.5rem">
     <!-- Quick start -->
     <section>
       <h2>Quick start <span class="tag">5 steps</span></h2>
       <div class="steps">
         <div class="step">
-          <div class="step-num">1</div>
+          <div class="step-num">01</div>
           <div class="step-body">
-            <h3><span class="step-emoji">🚀</span> Launch a board</h3>
-            <p>On the <a href="/commonboard.html" style="color:var(--accent)">Orbit Scheduler homepage</a>, fill in the <strong>Board name</strong> (e.g. "Climate Kickoff"), choose a <strong>start &amp; end date</strong> (up to 21 days), and set the <strong>time window</strong> your meetings might fall in. Click <strong>Launch board</strong>. The board is instantly created and stored in your browser.</p>
+            <h3>Launch a board</h3>
+            <p>On the <a href="commonboard.html">Orbit Scheduler homepage</a>, fill in the <strong>Board name</strong>, choose a <strong>start and end date</strong> (up to 21 days), and set the <strong>time window</strong>. Click <strong>Launch board</strong>. The board is created live and given a shareable link.</p>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">2</div>
+          <div class="step-num">02</div>
           <div class="step-body">
-            <h3><span class="step-emoji">👤</span> Enter your name</h3>
-            <p>At the top of the board view, type your name into the <strong>Your name</strong> field and click <strong>Save</strong>. This links all the slots you click to your name, so the group view knows who's available when.</p>
+            <h3>Enter your name</h3>
+            <p>At the top of the board, type your name and click <strong>Save name</strong>. Hours you mark are then linked to you on the heatmap.</p>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">3</div>
+          <div class="step-num">03</div>
           <div class="step-body">
-            <h3><span class="step-emoji">🗓</span> Mark your availability</h3>
-            <p>The grid shows all the time slots: columns are dates, rows are hours. In <strong>Mark mode</strong>, click any slot to toggle it — it glows with a white ring when selected. You can also <strong>click and drag</strong> across multiple slots to add or remove a whole range in one gesture. Your selections are saved automatically.</p>
+            <h3>Mark your availability</h3>
+            <p>Columns are dates, rows are hours. In <strong>Mark</strong> mode, click a cell to toggle it — a lime outline shows your selection. Click and drag to add or remove a whole range. Keyboard users can Tab to a cell and press Enter or Space.</p>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">4</div>
+          <div class="step-num">04</div>
           <div class="step-body">
-            <h3><span class="step-emoji">📡</span> Invite your team</h3>
-            <p>Click <strong>Share board</strong> and copy the link. Send it to your teammates. Anyone with the link can open the same shared board on any device, type their name, and mark their slots.</p>
+            <h3>Invite your team</h3>
+            <p>Click <strong>Share board</strong> and copy the link. Anyone with the link can open the same live board, type their name, and mark their hours.</p>
           </div>
         </div>
         <div class="step">
-          <div class="step-num">5</div>
+          <div class="step-num">05</div>
           <div class="step-body">
-            <h3><span class="step-emoji">📤</span> Cloud sync &amp; backup</h3>
-            <p>Orbit Scheduler now stores each board in a <strong>public cloud JSON document</strong>, so cross-device updates sync through the shared board link automatically.
+            <h3>Live sync and backup</h3>
+            <p>Boards sync through Space4Climate’s Orbit API, so updates show on other devices after a short delay.
             <br><br>
-            <strong>Normal workflow:</strong> Open the board link → enter your name → mark your availability → wait a moment for the board to sync.<br><br>
-            <strong>Backup workflow:</strong> If someone was offline, click <strong>Export my response</strong> to copy a backup code. The organiser can use <strong>Merge response</strong> to import it later.</p>
+            <strong>Usual path:</strong> Open the board link → save your name → mark hours.<br><br>
+            <strong>Backup:</strong> If someone was offline, they can <strong>Export my response</strong>. The organiser can then <strong>Merge response</strong>.</p>
           </div>
         </div>
       </div>
@@ -186,15 +1560,15 @@
       <h2>Reading the heatmap</h2>
       <p style="font-size:.9rem;color:var(--text2);margin-bottom:1rem">The grid cells are colour-coded by how many participants are available at that time. The brighter the cell, the more people are free.</p>
       <div class="heat-demo">
-        <div class="heat-swatch" style="background:#09102a"></div><span>0 people</span>
+        <div class="heat-swatch" style="background:#2a2a2a"></div><span>0 people</span>
         <div class="heat-arrow">→</div>
-        <div class="heat-swatch" style="background:#0d2460"></div><span>1</span>
-        <div class="heat-swatch" style="background:#0a4a8c"></div><span>some</span>
-        <div class="heat-swatch" style="background:#0e7abf"></div><span>~half</span>
-        <div class="heat-swatch" style="background:#14a98a"></div><span>most</span>
-        <div class="heat-swatch" style="background:#22e09a"></div><span>everyone ✓</span>
+        <div class="heat-swatch" style="background:#2a3208"></div><span>1</span>
+        <div class="heat-swatch" style="background:#3f4c00"></div><span>some</span>
+        <div class="heat-swatch" style="background:#6b8000"></div><span>~half</span>
+        <div class="heat-swatch" style="background:#b8d400"></div><span>most</span>
+        <div class="heat-swatch" style="background:#ebfd40"></div><span>everyone</span>
         <div class="heat-arrow" style="margin-left:.5rem">|</div>
-        <div class="heat-swatch" style="background:#0e7abf;outline:2px solid rgba(255,255,255,.85);outline-offset:-2px"></div><span>your selection (white ring)</span>
+        <div class="heat-swatch" style="background:#6b8000;outline:2px solid #ebfd40;outline-offset:-2px"></div><span>your selection</span>
       </div>
       <p style="font-size:.85rem;color:var(--text2);margin-top:.85rem">Hover over any cell to see a tooltip listing exactly who is available at that time. Switch to <strong>Overview mode</strong> (button in the grid header) to show numeric counts on every cell.</p>
     </section>
@@ -206,32 +1580,26 @@
       <h2>Key features</h2>
       <div class="feature-grid">
         <div class="feature-card">
-          <div class="icon">🖱</div>
           <h4>Drag to select</h4>
           <p>Click and drag across any range of slots to mark or unmark them in one fluid motion. Works on touch screens too.</p>
         </div>
         <div class="feature-card">
-          <div class="icon">🌈</div>
           <h4>Live heatmap</h4>
           <p>The grid updates in real time as each participant adds their name and marks slots. Best times are ranked automatically in the sidebar.</p>
         </div>
         <div class="feature-card">
-          <div class="icon">🔒</div>
-          <h4>Shared cloud board</h4>
-          <p>Each board is stored in a public JSON document so GitHub Pages users can access the same schedule from any device without Firebase or accounts.</p>
+          <h4>Live shared board</h4>
+          <p>Boards sync through Space4Climate so facilitators and teachers can open the same schedule from any device, with no accounts.</p>
         </div>
         <div class="feature-card">
-          <div class="icon">📤</div>
           <h4>Export &amp; merge backup</h4>
           <p>Each participant can still export a compact backup code. The organiser can import these codes later if they need to recover or merge offline responses.</p>
         </div>
         <div class="feature-card">
-          <div class="icon">📅</div>
           <h4>Up to 21 days</h4>
           <p>Schedule across up to three weeks in a single board. Set any time window (e.g. 09:00–18:00) to keep the grid focused.</p>
         </div>
         <div class="feature-card">
-          <div class="icon">🌍</div>
           <h4>Timezone display</h4>
           <p>Your local timezone is shown on the board so everyone knows which timezone the times refer to. Ideal for international Space4Climate teams.</p>
         </div>
@@ -272,7 +1640,7 @@
           <div class="faq-q">Will my boards still be there next week?
             <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
           </div>
-          <div class="faq-a">Usually yes. The board is stored in a public cloud document and each browser also keeps a local cache for convenience. Clearing your browser storage may remove your saved name on that device, but the shared board itself should still be available from the link unless the cloud service removes it.</div>
+          <div class="faq-a">The shared board stays available through the board link while Space4Climate is hosting it, and this browser also keeps a local copy. If you need a long-term copy, use <strong>Export my response</strong> or note the booking reference. Clearing browser storage only removes your saved name on that device.</div>
         </div>
         <div class="faq-item">
           <div class="faq-q">Where does the "best times" ranking come from?
@@ -291,34 +1659,104 @@
 
     <!-- CTA -->
     <div class="cta-card">
-      <h2>Ready to find your orbit?</h2>
-      <p>Launch a board now and discover the best time window for your Space4Climate mission.</p>
-      <a class="btn btn-primary" href="/commonboard.html">Open Orbit Scheduler →</a>
+      <h2>Find the hour that works.</h2>
+      <p>Launch a board and share it with facilitators and teachers.</p>
+      <a href="commonboard.html" class="button-outline margin-top-small w-inline-block">
+        <div>Launch a board</div>
+        <div class="button-arrow-wrapper-2 light"><img src="https://cdn.prod.website-files.com/65b810933000b6b25fd78458/65c40274b6ed92166e3c2b4e_arrow.svg" alt="" class="image"></div>
+      </a>
     </div>
-  </main>
 
+  </div>
+</main>
+<div id="orbit-site-footer">
+<footer class="footer_wrap"><div class="u-embed-css w-embed"><style>
+  .footer_wrap a {
+    color: var(--swatch--light);    
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 992px) {
+    .footer_header_logo1_wrap:pressed, .footer_header_logo2_wrap:pressed {
+      color: var(--swatch--brand);
+    }
+    .footer_form_btn:pressed {
+      background-color: var(--swatch--brand);
+    }
+    .footer_social_link:pressed {
+      border-color: var(--swatch--light);
+    }
+    .footer_bottom a:pressed,
+    .footer_layout a:pressed {
+      color: var(--swatch--light);    
+    }
+    .footer_menu_btn_wrap:pressed .footer_menu_btn_line {
+      width: 100%;
+    }
+  }
+
+  @media (pointer: fine) {
+    .footer_header_logo1_wrap:hover, .footer_header_logo2_wrap:hover {
+      color: var(--swatch--brand);
+    }
+    .footer_form_btn:hover {
+      background-color: var(--swatch--brand);
+    }
+    .footer_social_link:hover {
+      border-color: var(--swatch--light);
+    }
+    .footer_bottom a:hover,
+    .footer_layout a:hover {
+      color: var(--swatch--light);    
+    }
+    .footer_menu_btn_wrap:hover .footer_menu_btn_line {
+      width: 100%;
+    }
+  }
+</style></div><h2 class="footer_heading u-sr-only">Footer</h2><div class="footer_contain u-container"><div class="footer_header_wrap u-hflex-between-top"><a aria-label="Home Page" href="index.html" aria-current="page" class="footer_header_logo1_wrap w-inline-block w--current"><img src="https://github.com/user-attachments/assets/24a4b988-098e-411e-969f-314ed768f979" alt="Space4Climate" style="height:3rem;width:auto;"/></a><a aria-label="Home Page" href="index.html" aria-current="page" class="footer_header_logo2_wrap w-inline-block w--current"></a></div><div class="footer_component u-grid-desktop"><div class="footer_content u-column-custom"><div class="footer_form_layout u-hflex-between-center u-gap-5"><div class="footer_form_label">Sign up to our newsletter</div><div class="footer_form_wrap w-form"><form id="wf-form-Newsletter-form" name="wf-form-Newsletter-form" data-name="Newsletter form" method="get" n4-recaptcha-form="" class="footer_form_form" data-wf-page-id="65e849e1c2b475124d8fe8e8" data-wf-element-id="e6d443ba-c811-33ef-2b0b-56f81c11bd15" data-turnstile-sitekey="0x4AAAAAAAQTptj2So4dx43e"><div class="footer_form_inner"><input class="footer_form_field w-input" maxlength="256" name="Subscriber-email" data-name="Subscriber email" placeholder="Enter email address" type="email" id="Subscriber-email-footer" required=""/><input type="submit" data-wait="Please wait..." class="footer_form_btn w-button" value="Subscribe"/></div><div class="form_main_recaptcha"><div data-sitekey="6LdrywUrAAAAAIhpDYVGjhEhPaSFubcP6WEjts1s" class="w-form-formrecaptcha g-recaptcha g-recaptcha-error g-recaptcha-disabled"></div></div></form><div class="footer_form_success_wrap w-form-done"><div class="footer_form_inner"><div class="footer_form_field is-success"><div class="footer_form_text">Enter email address</div></div><div class="footer_form_btn is-success"><div class="footer_form_icon w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 14 10" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path d="M13.5 1.37648L4.58571 9.58809L0.5 5.82444L1.54743 4.85957L4.58571 7.65152L12.4526 0.411621L13.5 1.37648Z" fill="currentColor"/>
+</svg></div><div>Success</div></div></div></div><div class="footer_form_error w-form-fail"><div>Oops! Something went wrong while submitting the form.</div></div></div></div><nav class="footer_menu_wrap"><div class="footer_menu_layout u-grid-column-3"><div class="footer_menu_column"><div class="footer_menu_label">What we offer</div><ul role="list" class="footer_menu_list u-vflex-stretch-top u-gap-2 w-list-unstyled"><li class="footer_menu_item"><a href="sustainable-building-materials.html" class="footer_menu_btn_wrap w-inline-block"><div class="footer_menu_btn_text">Space</div><div class="footer_menu_btn_line_wrap"><div class="footer_menu_btn_line"></div></div></a></li><li class="footer_menu_item"><a href="education-fuelled initiatives.html" class="footer_menu_btn_wrap w-inline-block"><div class="footer_menu_btn_text">Climate</div><div class="footer_menu_btn_line_wrap"><div class="footer_menu_btn_line"></div></div></a></li><li class="footer_menu_item"><a href="carbon-sequestration.html" class="footer_menu_btn_wrap w-inline-block"><div class="footer_menu_btn_text">Climate Education</div><div class="footer_menu_btn_line_wrap"><div class="footer_menu_btn_line"></div></div></a></li></ul></div><div class="footer_menu_column"><div class="footer_menu_label">Company</div><ul role="list" class="footer_menu_list u-vflex-stretch-top u-gap-2 w-list-unstyled"><li class="footer_menu_item"><a href="about.html" class="footer_menu_btn_wrap w-inline-block"><div class="footer_menu_btn_text">About</div><div class="footer_menu_btn_line_wrap"><div class="footer_menu_btn_line"></div></div></a></li><li class="footer_menu_item"><a href="technology.html" class="footer_menu_btn_wrap w-inline-block"><div class="footer_menu_btn_text">Technology</div><div class="footer_menu_btn_line_wrap"><div class="footer_menu_btn_line"></div></div></a></li><li class="footer_menu_item"><a href="programs.html" class="footer_menu_btn_wrap w-inline-block"><div class="footer_menu_btn_text">Programs</div><div class="footer_menu_btn_line_wrap"><div class="footer_menu_btn_line"></div></div></a></li><li class="footer_menu_item"><a href="careers.html" class="footer_menu_btn_wrap w-inline-block"><div class="footer_menu_btn_text">Volunteer Roles</div><div class="footer_menu_btn_line_wrap"><div class="footer_menu_btn_line"></div></div></a></li></ul></div><div class="footer_menu_column"><div class="footer_menu_label">Resources</div><ul role="list" class="footer_menu_list u-vflex-stretch-top u-gap-2 w-list-unstyled"><li class="footer_menu_item"><a href="case-studies.html" class="footer_menu_btn_wrap w-inline-block"><div class="footer_menu_btn_text">Student Success Stories</div><div class="footer_menu_btn_line_wrap"><div class="footer_menu_btn_line"></div></div></a></li><li class="footer_menu_item"><a href="lab-notes.html" class="footer_menu_btn_wrap w-inline-block"><div class="footer_menu_btn_text">Learning Resources</div><div class="footer_menu_btn_line_wrap"><div class="footer_menu_btn_line"></div></div></a></li><li class="footer_menu_item"><a href="press.html" class="footer_menu_btn_wrap w-inline-block"><div class="footer_menu_btn_text">Updates</div><div class="footer_menu_btn_line_wrap"><div class="footer_menu_btn_line"></div></div></a></li><li class="footer_menu_item"><li class="footer_menu_item"><a href="commonboard.html" class="footer_menu_btn_wrap w-inline-block"><div class="footer_menu_btn_text">Orbit Scheduler</div><div class="footer_menu_btn_line_wrap"><div class="footer_menu_btn_line"></div></div></a></li><a href="https://www.reports.space4climate.org/" target="_blank" class="footer_menu_btn_wrap w-inline-block"><div class="footer_menu_btn_text">Reports</div><div class="footer_menu_btn_line_wrap"><div class="footer_menu_btn_line"></div></div></a></li></ul></div></div></nav></div></div><div class="footer_bottom u-grid-desktop u-gap-row-5"><div class="footer_social_list u-column-5"><a aria-label="LinkedIn" href="https://www.linkedin.com/company/s4cff/" target="_blank" class="footer_social_link w-inline-block"><div class="w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 64 64" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M22 20.3237C20.8954 20.3237 20 21.2192 20 22.3237V42.3237C20 43.4283 20.8954 44.3237 22 44.3237H42C43.1045 44.3237 44 43.4283 44 42.3237V22.3237C44 21.2192 43.1045 20.3237 42 20.3237H22ZM27.361 25.6607C27.3685 26.9357 26.4141 27.7213 25.2816 27.7157C24.2148 27.7101 23.2848 26.8607 23.2904 25.6626C23.296 24.5357 24.1866 23.6301 25.3435 23.6563C26.5173 23.6826 27.3685 24.5432 27.361 25.6607ZM32.3729 29.3394H29.0129H29.0111V40.7525H32.5623V40.4863C32.5623 39.9797 32.5619 39.4731 32.5615 38.9663C32.5604 37.6145 32.5592 36.2613 32.5661 34.91C32.568 34.5819 32.5829 34.2407 32.6673 33.9275C32.9841 32.7575 34.0361 32.0019 35.2099 32.1876C35.9636 32.3056 36.4623 32.7425 36.6723 33.4532C36.8017 33.8975 36.8599 34.3756 36.8655 34.8388C36.8807 36.2356 36.8785 37.6324 36.8764 39.0293C36.8756 39.5224 36.8748 40.0157 36.8748 40.5088V40.7507H40.4373V40.4769C40.4373 39.8743 40.4371 39.2717 40.4367 38.6692C40.436 37.1632 40.4352 35.6572 40.4392 34.1507C40.4411 33.47 40.368 32.7988 40.2011 32.1407C39.9517 31.1619 39.4361 30.3519 38.598 29.7669C38.0036 29.3507 37.3511 29.0825 36.6217 29.0525C36.5387 29.0491 36.4549 29.0446 36.3708 29.04C35.9979 29.0199 35.6188 28.9994 35.2623 29.0713C34.2423 29.2757 33.3461 29.7425 32.6692 30.5656C32.5905 30.66 32.5136 30.7559 32.3988 30.8989L32.3729 30.9313V29.3394ZM23.5755 40.7563H27.1099V29.3468H23.5755V40.7563Z" fill="currentColor"/>
+</svg></div></a><a aria-label="x" href="https://www.twitter.com/s4cff" target="_blank" class="footer_social_link w-inline-block"><div class="w-embed"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 65 64" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+  <mask id="mask0_5622_8" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="20" y="20" width="25" height="24">
+    <path d="M20.4619 20H44.4619V44H20.4619V20Z" fill="currentColor"/>
+  </mask>
+  <g mask="url(#mask0_5622_8)">
+    <path d="M39.3619 21.1235H43.0425L35.0025 30.3361L44.4619 42.8744H37.0562L31.2516 35.2715L24.6173 42.8744H20.9333L29.5322 33.0172L20.4619 21.1252H28.0562L33.2951 28.0732L39.3619 21.1235ZM38.0676 40.6664H40.1076L26.9419 23.2167H24.7545L38.0676 40.6664Z" fill="currentColor"/>
+  </g>
+</svg></div></a><a aria-label="Bluesky" href="https://bsky.app/profile/space4climate.org" target="_blank" class="footer_social_link w-inline-block"><img src="https://cdn.prod.website-files.com/65b810933000b6b25fd78458/680bb33c8d83a27eab505a80_footer-icon.png" loading="lazy" alt="" class="footer_social_visual u-cover-absolute"/></a></div><div class="footer_bottom_list u-hflex-between-bottom u-gap-3 u-column-7"><div class="footer_copyright">© <span class="copyright-year">2026</span> Space4Climate.  All rights reserved.</div><a href="legal/privacy-policy.html" class="footer_legal_link">Legals</a></div></div></div><div class="u-embed-js w-embed w-script"><script>
+  pageFunctions.addFunction('CopyrightYear', function() {
+    // Get the current year
+    const currentYear = new Date().getFullYear();
+
+    // Select all elements with the class 'copyright-year'
+    const copyrightYearElements = document.querySelectorAll('.copyright-year');
+
+    // Update the text content of each selected element to the current year
+    copyrightYearElements.forEach(function (element) {
+      element.textContent = currentYear;
+    });
+  });
+
+  const formInputs = document.querySelectorAll("[n4-recaptcha-form]");
+  formInputs.forEach((formElement) => {
+    const recaptcha = formElement.querySelector(".form_main_recaptcha");
+
+    // Show reCAPTCHA when any input field is focused
+    formElement.addEventListener(
+      "focusin",
+      function () {
+        if (recaptcha.style.display !== "block") {
+          recaptcha.style.display = "block";
+        }
+      },
+      { once: true }
+    );
+  });
+</script></div></footer>
+</div>
+</div>
   <script>
-    // Star field
-    const canvas = document.getElementById('stars');
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-    function init() {
-      canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-      stars = Array.from({length:100}, () => ({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*1.1+0.15, phase:Math.random()*Math.PI*2, sp:Math.random()*0.003+0.001}));
-    }
-    function draw() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      const t = Date.now()/1000;
-      stars.forEach(s => {
-        const a = 0.25 + 0.5*(0.5+0.5*Math.sin(t*s.sp*20+s.phase));
-        ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-        ctx.fillStyle = `rgba(180,210,255,${a})`; ctx.fill();
-      });
-      requestAnimationFrame(draw);
-    }
-    window.addEventListener('resize', init); init(); draw();
-
-    // FAQ accordion
     document.querySelectorAll('.faq-q').forEach(btn => {
       btn.addEventListener('click', () => {
         const item = btn.closest('.faq-item');
@@ -328,6 +1766,7 @@
       });
     });
   </script>
-  <script src="/site-support.js?v=5"></script>
+  <script>pageFunctions.executeFunctions();</script>
+  <script src="site-support.js?v=5"></script>
 </body>
 </html>

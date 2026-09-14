@@ -4,3 +4,6 @@
 
 # Vercel
 .vercel
+
+# Orbit Scheduler local board store
+space4climate/.orbit-data/

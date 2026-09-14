@@ -68,11 +68,28 @@ html.s4c-js body.u-overflow-hidden {
   rotate: none !important;
 }
 
-/* Wheel events hit the page, not the autoplaying hero iframe */
+/* Wheel events hit the page, not the autoplaying hero iframe/video */
 .section-video-hero iframe,
 iframe.iframe.home,
-.section-video-hero .iframe {
+.section-video-hero .iframe,
+.section-video-hero video,
+video.iframe.home {
   pointer-events: none !important;
+}
+
+.section-video-hero video,
+video.iframe.home,
+video.g_visual_video,
+.g_visual_wrap video,
+.div-5 video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.section-video-hero video.iframe.home {
+  min-height: 100vh;
 }
 
 .section-video-hero {
