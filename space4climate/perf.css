@@ -145,3 +145,143 @@ img.u-cover-absolute,
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Brand mark ──────────────────────────────────────────────────────────
+   The emblem carries fine detail and dark-blue ring text, so it disappears
+   against both the dark video hero and the dark footer. A white chip behind
+   it keeps it readable in every nav state (transparent, .scrolled, .open). */
+.s4c-logo-mark {
+  box-sizing: border-box;
+  height: 3rem;
+  width: auto;
+  max-width: none;
+  display: block;
+  flex: none;
+  padding: 0.3rem 0.35rem;
+  border-radius: 0.75rem;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(9, 18, 44, 0.22), 0 0 0 1px rgba(9, 18, 44, 0.08);
+}
+
+.s4c-logo-mark.is-footer {
+  height: 3.75rem;
+}
+
+/* The wordmark beside the emblem needs its own contrast over the hero video. */
+.nav_logo_wrap span {
+  text-shadow: 0 1px 2px rgba(9, 18, 44, 0.45);
+}
+
+.nav_component.scrolled .nav_logo_wrap span {
+  text-shadow: none;
+}
+
+@media screen and (max-width: 767px) {
+  .s4c-logo-mark {
+    height: 2.5rem;
+  }
+  .s4c-logo-mark.is-footer {
+    height: 3rem;
+  }
+}
+
+/* ── Language switcher ───────────────────────────────────────────────────
+   Sits in the nav button row on every page. It borrows currentColor so it
+   stays legible through all three nav states: transparent over the video
+   hero, .scrolled on white, and .open on dark. */
+.s4c-lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-right: 0.75rem;
+  padding: 0.15rem;
+  border: 1.5px solid currentColor;
+  border-radius: 0.5rem;
+  opacity: 0.85;
+}
+
+.s4c-lang-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: 0.35rem 0.5rem;
+  border-radius: 0.35rem;
+  cursor: pointer;
+}
+
+.s4c-lang-btn.is-active {
+  background: currentColor;
+}
+
+/* The label has to flip against the filled pill, whichever way round the
+   nav's colours currently are. */
+.s4c-lang-btn.is-active span {
+  filter: invert(1) grayscale(1) contrast(3);
+}
+
+.s4c-lang-btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 1px;
+}
+
+@media screen and (max-width: 991px) {
+  .s4c-lang-switch {
+    margin-right: 0.5rem;
+  }
+}
+
+/* ── Video visibility ────────────────────────────────────────────────────
+   The Webflow theme lays a flat 31% black wash (#0000004f) across the whole
+   hero video, which dims the footage everywhere to make centred white text
+   readable in one spot. Replaced here with a scrim that is dark only behind
+   the text and clears towards the edges, so the film stays visible, plus a
+   modest contrast and saturation lift on the footage itself. The heading and
+   standfirst get their own shadow, which is what pays for the lighter wash. */
+.section-video-hero .hero-overlay {
+  background-image:
+    radial-gradient(
+      ellipse 60% 55% at 50% 50%,
+      rgba(0, 0, 0, 0.42) 0%,
+      rgba(0, 0, 0, 0.26) 45%,
+      rgba(0, 0, 0, 0.06) 78%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0) 22%);
+}
+
+.section-video-hero iframe,
+.section-video-hero video,
+.div-5 iframe,
+.div-5 video,
+iframe[src*="vidzflow"],
+video.g_visual_video {
+  filter: contrast(1.12) saturate(1.14) brightness(1.04);
+}
+
+.hero-overlay h1,
+.hero-overlay h2,
+.hero-overlay p,
+.home-hero-title,
+.paragraph-large.home-hero {
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.62), 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* The hero call to action sits on the same bright footage. */
+.section-video-hero .button-outline {
+  border-color: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2px);
+}
+
+@media (prefers-contrast: more) {
+  /* Readers who ask for more contrast get the darker scrim back. */
+  .section-video-hero .hero-overlay {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  }
+}

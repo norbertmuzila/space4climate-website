@@ -7,3 +7,9 @@
 
 # Orbit Scheduler local board store
 space4climate/.orbit-data/
+
+# Local volunteer / session records written by dev-server.py
+space4climate/.s4c-data/
+
+# Python bytecode cache
+__pycache__/
