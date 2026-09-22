@@ -25,6 +25,7 @@ so the scheduling features work offline. It needs nothing but Python 3.11+.
 | `space4climate/scheduling.css` | Styles specific to the volunteer and session pages |
 | `space4climate/i18n.js` | English/German switching |
 | `space4climate/scheduling.js` | Timezone maths, the weekly grid, window validation |
+| `space4climate/login.js` | The login, signup and Google sign-in page logic |
 | `api/` | Vercel serverless functions |
 | `tests/` | Checks you can run without installing anything |
 
@@ -49,10 +50,37 @@ While the window is valid the page checks it against the volunteer roster and
 reports how many facilitators are free. The browser only ever receives
 timezones and availability — never names or email addresses.
 
+## Accounts
+
+`/login.html` offers two ways in, both landing on the same account record:
+
+- **a username or an email address, plus a password.** Passwords are stored as
+  salted scrypt hashes, never in clear. Login answers with one message whether
+  the account is missing or the password is wrong, so the form cannot be used
+  to discover who has an account, and repeated failures are rate limited.
+- **Sign in with Google.** The first sign-in creates the account. The ID token
+  is verified in full — RS256 signature against Google's published key for that
+  `kid`, issuer, audience, expiry, and that Google considers the address
+  verified — so a token minted for another site is refused.
+
+Sessions are opaque random tokens in an `HttpOnly; Secure; SameSite=Lax`
+cookie. Only a SHA-256 of the token is stored, so a dump of the database does
+not hand anyone a set of live sessions.
+
+This replaced a Firebase scaffold that was never configured: every form sat in
+"demo mode" behind a "setup required" banner and no login worked.
+`firebase-config.js` is gone, and nothing loads the Firebase SDK any more.
+
 ### Endpoints
 
 | Endpoint | Purpose |
 | --- | --- |
+| `GET /api/auth?action=config` | What the login page needs to render |
+| `GET /api/auth?action=me` | The signed-in user, or null |
+| `POST /api/auth?action=signup` | Create an account |
+| `POST /api/auth?action=login` | Username or email, plus password |
+| `POST /api/auth?action=google` | Exchange a Google ID token for a session |
+| `POST /api/auth?action=logout` | End the session |
 | `GET /api/volunteers` | Service status and roster size |
 | `GET /api/volunteers?roster=1` | Anonymised availability, for matching |
 | `GET,PUT /api/volunteers?id=&token=` | Read or update one registration |
@@ -77,6 +105,21 @@ KV_REST_API_URL
 KV_REST_API_TOKEN
 ```
 
+Accounts use the same store, so logging in and creating an account also need
+those two. Until they are set, the login page says so plainly instead of
+accepting details it cannot keep.
+
+**Sign in with Google** additionally needs an OAuth client ID:
+
+```
+GOOGLE_CLIENT_ID
+```
+
+Create it at console.cloud.google.com → APIs & Services → Credentials → OAuth
+client ID → Web application, and list the site's origins under **Authorized
+JavaScript origins** (the deployment URL and the live domain). Without it the
+Google button is simply not rendered — the rest of the page works as normal.
+
 Locally, `dev-server.py` writes JSON files under `space4climate/.s4c-data/`
 instead, which `.gitignore` excludes.
 
@@ -91,6 +134,7 @@ unreviewed machine German on a schools site would read worse than none.
 
 ```bash
 node tests/scheduling.test.js   # timezone maths, DST, window rules, matching
+node tests/auth.test.js         # password hashing, sessions, Google token checks
 python tests/check-links.py     # every internal link and asset resolves
 python tests/check-i18n.py      # each German entry matches real text on a page
 ```

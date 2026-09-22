@@ -8,6 +8,9 @@ because they hold personal data; locally they are plain JSON files under
 """
 from __future__ import annotations
 
+import base64
+import hashlib
+import hmac
 import json
 import os
 import re
@@ -15,6 +18,7 @@ import secrets
 import sys
 import time
 import urllib.parse
+import urllib.request
 import zoneinfo
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -30,8 +34,8 @@ TIME_RE = re.compile(r"^([01]\d|2[0-3]):[0-5]\d$")
 EMAIL_RE = re.compile(r"^[^\s@]+@[^\s@]+\.[^\s@]{2,}$")
 LANGS = ("en", "de")
 DATA_DIR.mkdir(exist_ok=True)
-(PEOPLE_DIR / "volunteers").mkdir(parents=True, exist_ok=True)
-(PEOPLE_DIR / "sessions").mkdir(parents=True, exist_ok=True)
+for _kind in ("volunteers", "sessions", "users", "logins"):
+    (PEOPLE_DIR / _kind).mkdir(parents=True, exist_ok=True)
 
 
 def new_id() -> str:
@@ -247,6 +251,118 @@ def validate_session(raw):
     }, ""
 
 
+SESSION_COOKIE = "s4c_session"
+SESSION_SECONDS = 30 * 24 * 60 * 60
+USERNAME_RE = re.compile(r"^[a-zA-Z0-9._-]{3,30}$")
+SCRYPT = {"n": 16384, "r": 8, "p": 1, "dklen": 64}
+
+
+def hash_password(password: str) -> str:
+    salt = secrets.token_bytes(16)
+    key = hashlib.scrypt(password.encode("utf-8"), salt=salt, **SCRYPT)
+    return "scrypt${n}${r}${p}${salt}${key}".format(
+        salt=base64.b64encode(salt).decode(),
+        key=base64.b64encode(key).decode(),
+        **SCRYPT,
+    )
+
+
+def password_matches(password: str, stored) -> bool:
+    if not isinstance(stored, str):
+        return False
+    parts = stored.split("$")
+    if len(parts) != 6 or parts[0] != "scrypt":
+        return False
+    _, n, r, p, salt_b64, key_b64 = parts
+    expected = base64.b64decode(key_b64)
+    actual = hashlib.scrypt(
+        password.encode("utf-8"),
+        salt=base64.b64decode(salt_b64),
+        n=int(n),
+        r=int(r),
+        p=int(p),
+        dklen=len(expected),
+    )
+    return hmac.compare_digest(actual, expected)
+
+
+def token_hash(token: str) -> str:
+    return hashlib.sha256(token.encode("utf-8")).hexdigest()
+
+
+def find_user(predicate):
+    for doc in all_records("users"):
+        if predicate(doc):
+            return doc
+    return None
+
+
+def find_by_identifier(identifier: str):
+    """Accept either a username or an email address, as the login form does."""
+    value = (identifier or "").strip()
+    if not value:
+        return None
+    if "@" in value:
+        wanted = value.lower()
+        return find_user(lambda d: (d.get("email") or "").lower() == wanted)
+    wanted = value.lower()
+    return find_user(lambda d: (d.get("username") or "").lower() == wanted)
+
+
+def derive_username(email: str) -> str:
+    base = re.sub(r"[^a-zA-Z0-9._-]", "", email.split("@")[0])[:24] or "member"
+    if len(base) < 3:
+        base += "user"
+    if not find_user(lambda d: (d.get("username") or "").lower() == base.lower()):
+        return base
+    while True:
+        candidate = f"{base}{secrets.randbelow(9000) + 1000}"
+        if not find_user(lambda d: (d.get("username") or "").lower() == candidate.lower()):
+            return candidate
+
+
+def public_user(user):
+    return {
+        "id": user.get("id"),
+        "name": user.get("name", ""),
+        "username": user.get("username", ""),
+        "email": user.get("email", ""),
+        "picture": user.get("picture", ""),
+        "provider": user.get("provider", "password"),
+        "createdAt": user.get("createdAt"),
+    }
+
+
+def verify_google_token_dev(credential: str):
+    """Verify a Google ID token via Google's tokeninfo endpoint.
+
+    The Vercel function checks the RS256 signature against Google's published
+    keys itself. Doing the same here would mean a crypto dependency the dev
+    server does not otherwise need, so locally we ask Google to validate the
+    token instead. Both paths still check audience, issuer and expiry.
+    """
+    client_id = os.environ.get("GOOGLE_CLIENT_ID", "").strip()
+    if not client_id:
+        raise ValueError("google_not_configured")
+    url = "https://oauth2.googleapis.com/tokeninfo?id_token=" + urllib.parse.quote(credential or "")
+    try:
+        with urllib.request.urlopen(url, timeout=10) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except Exception:
+        raise ValueError("google_bad_token")
+    if payload.get("aud") != client_id:
+        raise ValueError("google_bad_token")
+    if payload.get("iss") not in ("accounts.google.com", "https://accounts.google.com"):
+        raise ValueError("google_bad_token")
+    if int(payload.get("exp", 0)) < time.time():
+        raise ValueError("google_bad_token")
+    if str(payload.get("email_verified")).lower() != "true":
+        raise ValueError("google_email_unverified")
+    if not payload.get("email"):
+        raise ValueError("google_bad_token")
+    return payload
+
+
 def record_path(kind: str, record_id: str) -> Path:
     safe = re.sub(r"[^a-zA-Z0-9._-]", "", record_id)[:80]
     return PEOPLE_DIR / kind / f"{safe}.json"
@@ -293,6 +409,7 @@ class Handler(SimpleHTTPRequestHandler):
             "/api/orbit": self.handle_orbit,
             "/api/volunteers": self.handle_volunteers,
             "/api/sessions": self.handle_sessions,
+            "/api/auth": self.handle_auth,
         }.get(parsed.path.rstrip("/"))
 
     def do_OPTIONS(self):
@@ -443,6 +560,166 @@ class Handler(SimpleHTTPRequestHandler):
                 write_record("volunteers", record_id, doc)
                 return self.send_json(200, {"ok": True, "volunteer": without_token(doc)})
             return self.send_json(405, {"error": "method_not_allowed"})
+        except Exception as err:
+            return self.send_json(500, {"error": "server_error", "message": str(err)})
+
+    def send_json_cookie(self, status, payload, cookie):
+        body = json.dumps(payload).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Cache-Control", "no-store")
+        self.send_header("Set-Cookie", cookie)
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def session_token(self):
+        for part in (self.headers.get("Cookie") or "").split(";"):
+            name, _, value = part.strip().partition("=")
+            if name == SESSION_COOKIE:
+                return urllib.parse.unquote(value)
+        return ""
+
+    def start_session(self, user_id):
+        token = secrets.token_urlsafe(32)
+        write_record("logins", token_hash(token), {"userId": user_id, "createdAt": now_ms()})
+        # No Secure flag here: the dev server is plain http on localhost.
+        return (
+            f"{SESSION_COOKIE}={token}; Path=/; Max-Age={SESSION_SECONDS}; HttpOnly; SameSite=Lax"
+        )
+
+    def current_user(self):
+        token = self.session_token()
+        if not token:
+            return None
+        session = read_record("logins", token_hash(token))
+        if not session or not session.get("userId"):
+            return None
+        return read_record("users", session["userId"])
+
+    def handle_auth(self, method, parsed):
+        query = urllib.parse.parse_qs(parsed.query)
+        action = (query.get("action") or [""])[0]
+        client_id = os.environ.get("GOOGLE_CLIENT_ID", "").strip()
+        try:
+            if action == "config":
+                return self.send_json(
+                    200,
+                    {
+                        "ok": True,
+                        "googleClientId": client_id,
+                        # The dev server always has somewhere to write, so
+                        # password accounts work locally with no setup.
+                        "passwordAccounts": True,
+                        "googleSignIn": bool(client_id),
+                    },
+                )
+
+            if action == "me":
+                user = self.current_user()
+                return self.send_json(200, {"ok": True, "user": public_user(user) if user else None})
+
+            if method != "POST":
+                return self.send_json(405, {"error": "method_not_allowed"})
+
+            if action == "logout":
+                token = self.session_token()
+                if token:
+                    path = record_path("logins", token_hash(token))
+                    if path.exists():
+                        path.unlink()
+                return self.send_json_cookie(
+                    200, {"ok": True}, f"{SESSION_COOKIE}=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax"
+                )
+
+            if action == "signup":
+                body = self.read_json()
+                name = clean_text(body.get("name"), 80)
+                email = clean_text(body.get("email"), 120).lower()
+                username = clean_text(body.get("username"), 30)
+                password = body.get("password") or ""
+                if not name:
+                    return self.send_json(400, {"error": "missing_name"})
+                if not EMAIL_RE.match(email):
+                    return self.send_json(400, {"error": "invalid_email"})
+                if username and not USERNAME_RE.match(username):
+                    return self.send_json(400, {"error": "invalid_username"})
+                if len(password) < 8:
+                    return self.send_json(400, {"error": "weak_password"})
+                if find_user(lambda d: (d.get("email") or "").lower() == email):
+                    return self.send_json(409, {"error": "email_taken"})
+                if username and find_user(
+                    lambda d: (d.get("username") or "").lower() == username.lower()
+                ):
+                    return self.send_json(409, {"error": "username_taken"})
+                user = {
+                    "id": "u_" + secrets.token_hex(6),
+                    "name": name,
+                    "email": email,
+                    "username": username or derive_username(email),
+                    "passwordHash": hash_password(password),
+                    "provider": "password",
+                    "picture": "",
+                    "createdAt": now_ms(),
+                }
+                write_record("users", user["id"], user)
+                return self.send_json_cookie(
+                    201, {"ok": True, "user": public_user(user)}, self.start_session(user["id"])
+                )
+
+            if action == "login":
+                body = self.read_json()
+                identifier = clean_text(body.get("identifier") or body.get("email"), 120)
+                password = body.get("password") or ""
+                if not identifier or not password:
+                    return self.send_json(400, {"error": "missing_credentials"})
+                user = find_by_identifier(identifier)
+                if not user or not user.get("passwordHash"):
+                    if user:
+                        return self.send_json(401, {"error": "use_google"})
+                    return self.send_json(401, {"error": "bad_credentials"})
+                if not password_matches(password, user["passwordHash"]):
+                    return self.send_json(401, {"error": "bad_credentials"})
+                return self.send_json_cookie(
+                    200, {"ok": True, "user": public_user(user)}, self.start_session(user["id"])
+                )
+
+            if action == "google":
+                body = self.read_json()
+                try:
+                    payload = verify_google_token_dev(body.get("credential"))
+                except ValueError as err:
+                    code = str(err)
+                    status = 503 if code == "google_not_configured" else 401
+                    return self.send_json(status, {"error": code})
+                email = payload["email"].lower()
+                user = find_user(lambda d: (d.get("email") or "").lower() == email)
+                created = user is None
+                if user:
+                    user["picture"] = payload.get("picture") or user.get("picture", "")
+                    user["name"] = user.get("name") or payload.get("name", "")
+                    user["googleSub"] = payload.get("sub")
+                    user["lastLoginAt"] = now_ms()
+                else:
+                    user = {
+                        "id": "u_" + secrets.token_hex(6),
+                        "name": (payload.get("name") or email.split("@")[0])[:80],
+                        "email": email,
+                        "username": derive_username(email),
+                        "passwordHash": "",
+                        "provider": "google",
+                        "googleSub": payload.get("sub"),
+                        "picture": payload.get("picture", ""),
+                        "createdAt": now_ms(),
+                    }
+                write_record("users", user["id"], user)
+                return self.send_json_cookie(
+                    200,
+                    {"ok": True, "user": public_user(user), "created": created},
+                    self.start_session(user["id"]),
+                )
+
+            return self.send_json(400, {"error": "unknown_action"})
         except Exception as err:
             return self.send_json(500, {"error": "server_error", "message": str(err)})
 

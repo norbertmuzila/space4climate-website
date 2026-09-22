@@ -57,6 +57,22 @@ async function kvSet(key, value) {
   await kvCommand(['SET', key, JSON.stringify(value)]);
 }
 
+/** Write with a time to live, so sessions expire without a sweeper. */
+async function kvSetEx(key, value, seconds) {
+  await kvCommand(['SET', key, JSON.stringify(value), 'EX', String(seconds)]);
+}
+
+async function kvDel(key) {
+  await kvCommand(['DEL', key]);
+}
+
+/** Count an event in a fixed window; returns the running total. */
+async function kvBump(key, seconds) {
+  const count = await kvCommand(['INCR', key]);
+  if (Number(count) === 1) await kvCommand(['EXPIRE', key, String(seconds)]);
+  return Number(count) || 0;
+}
+
 /** Members of a set, used to enumerate the roster without scanning all keys. */
 async function kvMembers(key) {
   const result = await kvCommand(['SMEMBERS', key]);
@@ -228,8 +244,11 @@ module.exports = {
   LANGS,
   applyCors,
   kvAdd,
+  kvBump,
+  kvDel,
   kvGet,
   kvSet,
+  kvSetEx,
   newId,
   readBody,
   readIndex,

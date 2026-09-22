@@ -5,11 +5,9 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PQSL59NF4Z"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-PQSL59NF4Z');</script>
 <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="69e3e771-fc08-44ca-acb9-f866b4eca56e" data-blockingmode="auto" type="text/javascript"></script>
-<!-- Firebase SDK (compat v10) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<!-- Firebase config -->
-<script src="firebase-config.js"></script>
+
+
+
 <!-- Login page styles -->
 <style>
 /* Prevent Webflow animations hiding our sections */
@@ -65,6 +63,10 @@ html,body{overflow-y:auto!important;height:auto!important;}
 .lf-success.show{display:block;}
 .lf-link{font-size:.83rem;color:#3e8cff;background:none;border:none;cursor:pointer;text-decoration:underline;padding:0;transition:color .2s;}
 .lf-link:hover{color:#2d6dd4;}
+.lf-optional{color:#94a3b8;font-weight:400;font-size:.82rem;}
+.lf-help{font-size:.78rem;color:#64748b;margin:.35rem 0 0;line-height:1.5;}
+.lf-google-wrap{display:none;}
+.lf-google{display:flex;justify-content:center;margin:.35rem 0 .75rem;}
 .lf-divider{font-size:.82rem;color:#94a3b8;text-align:center;margin:.75rem 0;}
 .lf-pw-strength{height:3px;border-radius:2px;margin-top:.4rem;background:#e2e8f0;overflow:hidden;}
 .lf-pw-strength-bar{height:100%;border-radius:2px;transition:width .3s,background .3s;}
@@ -89,10 +91,10 @@ html,body{overflow-y:auto!important;height:auto!important;}
 .lf-reset-back:hover{color:#3e8cff;}
 .lf-reset-back svg{width:.9rem;height:.9rem;}
 
-/* ===== FIREBASE NOT CONFIGURED NOTICE ===== */
-.firebase-notice{background:#fffbeb;border:1px solid #fde68a;border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:.85rem;color:#92400e;line-height:1.6;display:none;}
-.firebase-notice.show{display:block;}
-.firebase-notice a{color:#b45309;font-weight:600;}
+/* ===== ACCOUNTS UNAVAILABLE NOTICE ===== */
+.auth-notice{background:#fffbeb;border:1px solid #fde68a;border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:.85rem;color:#92400e;line-height:1.6;display:none;}
+.auth-notice.show{display:block;}
+.auth-notice a{color:#b45309;font-weight:600;}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
@@ -244,12 +246,8 @@ html,body{overflow-y:auto!important;height:auto!important;}
     <div class="login-card-wrap">
       <div class="login-card" role="main" aria-label="Authentication">
 
-        <!-- Firebase not configured notice -->
-        <div id="firebase-notice" class="firebase-notice">
-          <strong>⚠️ Setup required:</strong> Firebase is not yet configured. Follow the
-          <a href="firebase-config.js" target="_blank">firebase-config.js</a> instructions to
-          enable authentication. This form is in <em>demo mode</em> until then.
-        </div>
+        <!-- Filled in by login.js only when accounts are genuinely unavailable -->
+        <div id="auth-notice" class="auth-notice" role="status"></div>
 
         <!-- Logged-in state -->
         <div id="loggedin-panel" class="login-loggedin" aria-live="polite">
@@ -282,15 +280,15 @@ html,body{overflow-y:auto!important;height:auto!important;}
           <!-- ── Log in form ── -->
           <div id="section-login" class="login-form-section active" role="tabpanel" aria-labelledby="tab-login">
             <h2 class="login-form-title">Welcome back</h2>
-            <p class="login-form-sub">Enter your email and password to access your account.</p>
+            <p class="login-form-sub">Use your username or email address, or continue with Google.</p>
 
             <div id="login-error" class="lf-error" role="alert"></div>
             <div id="login-success" class="lf-success" role="status"></div>
 
             <form id="form-login" novalidate>
               <div class="lf-group">
-                <label for="login-email">Email address <span style="color:#dc2626" aria-hidden="true">*</span></label>
-                <input type="email" id="login-email" name="email" autocomplete="email" required placeholder="you@example.com"/>
+                <label for="login-email">Username or email <span style="color:#dc2626" aria-hidden="true">*</span></label>
+                <input type="text" id="login-email" name="identifier" autocomplete="username" required placeholder="Your username or you@example.com"/>
               </div>
               <div class="lf-group">
                 <label for="login-password">Password <span style="color:#dc2626" aria-hidden="true">*</span></label>
@@ -309,6 +307,10 @@ html,body{overflow-y:auto!important;height:auto!important;}
                 <svg id="btn-login-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;animation:spin 0.8s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
               </button>
             </form>
+            <div id="google-signin-wrap" class="lf-google-wrap">
+              <div class="lf-divider">— or —</div>
+              <div id="google-signin" class="lf-google"></div>
+            </div>
             <div class="lf-divider">— or —</div>
             <div style="text-align:center;font-size:.88rem;color:#64748b;">
               New here? <button type="button" class="lf-link" id="btn-go-signup">Create a free account</button>
@@ -331,6 +333,11 @@ html,body{overflow-y:auto!important;height:auto!important;}
               <div class="lf-group">
                 <label for="signup-email">Email address <span style="color:#dc2626" aria-hidden="true">*</span></label>
                 <input type="email" id="signup-email" name="email" autocomplete="email" required placeholder="you@example.com"/>
+              </div>
+              <div class="lf-group">
+                <label for="signup-username">Username <span class="lf-optional">(optional)</span></label>
+                <input type="text" id="signup-username" name="username" autocomplete="username" placeholder="Pick a username" pattern="[a-zA-Z0-9._-]{3,30}"/>
+                <p class="lf-help">3-30 characters. You can log in with this or with your email. Leave blank and we will pick one for you.</p>
               </div>
               <div class="lf-group">
                 <label for="signup-password">Password <span style="color:#dc2626" aria-hidden="true">*</span></label>
@@ -396,240 +403,7 @@ html,body{overflow-y:auto!important;height:auto!important;}
 @keyframes spin{to{transform:rotate(360deg)}}
 </style>
 
-<script>
-(function () {
-  'use strict';
-
-  /* ─── Helpers ─── */
-  function el(id) { return document.getElementById(id); }
-
-  function showError(id, msg) {
-    var e = el(id + '-error'); if (!e) return;
-    e.textContent = msg; e.classList.add('show');
-  }
-  function hideError(id) {
-    var e = el(id + '-error'); if (e) { e.textContent = ''; e.classList.remove('show'); }
-  }
-  function showSuccess(id, msg) {
-    var e = el(id + '-success'); if (!e) return;
-    e.textContent = msg; e.classList.add('show');
-  }
-  function hideSuccess(id) {
-    var e = el(id + '-success'); if (e) { e.textContent = ''; e.classList.remove('show'); }
-  }
-  function setLoading(prefix, loading) {
-    var btn = el('btn-' + prefix);
-    var txt = el('btn-' + prefix + '-text');
-    var spin = el('btn-' + prefix + '-spinner');
-    if (!btn) return;
-    btn.disabled = loading;
-    if (txt) txt.style.opacity = loading ? '0.6' : '1';
-    if (spin) spin.style.display = loading ? 'inline' : 'none';
-  }
-
-  /* ─── Tab switching ─── */
-  function switchTab(tab) {
-    document.querySelectorAll('.login-tab').forEach(function(b) {
-      var active = b.dataset.tab === tab;
-      b.classList.toggle('active', active);
-      b.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
-    document.querySelectorAll('.login-form-section').forEach(function(s) {
-      s.classList.remove('active');
-    });
-    var target = el('section-' + tab);
-    if (target) target.classList.add('active');
-  }
-
-  document.querySelectorAll('.login-tab').forEach(function(btn) {
-    btn.addEventListener('click', function() { switchTab(btn.dataset.tab); });
-  });
-  el('btn-go-signup').addEventListener('click', function() { switchTab('signup'); });
-  el('btn-go-login').addEventListener('click', function() { switchTab('login'); });
-  el('btn-show-reset').addEventListener('click', function() { switchTab('reset'); });
-  el('btn-reset-back').addEventListener('click', function() { switchTab('login'); });
-
-  /* ─── Password visibility toggles ─── */
-  document.querySelectorAll('.lf-pw-toggle').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var input = el(btn.dataset.target);
-      if (!input) return;
-      var isText = input.type === 'text';
-      input.type = isText ? 'password' : 'text';
-      btn.setAttribute('aria-label', isText ? 'Show password' : 'Hide password');
-    });
-  });
-
-  /* ─── Password strength indicator ─── */
-  el('signup-password').addEventListener('input', function() {
-    var pw = this.value;
-    var strength = 0;
-    if (pw.length >= 8) strength++;
-    if (/[A-Z]/.test(pw)) strength++;
-    if (/[0-9]/.test(pw)) strength++;
-    if (/[^A-Za-z0-9]/.test(pw)) strength++;
-    var bar = el('pw-strength-bar');
-    var colors = ['#fca5a5', '#fbbf24', '#34d399', '#10b981'];
-    var widths = ['25%', '50%', '75%', '100%'];
-    if (bar) {
-      bar.style.width  = pw.length === 0 ? '0%' : widths[strength - 1] || '25%';
-      bar.style.background = pw.length === 0 ? '#e2e8f0' : colors[strength - 1] || '#fca5a5';
-    }
-  });
-
-  /* ─── Firebase initialisation ─── */
-  var auth = null;
-  var firebaseReady = false;
-  var IS_PLACEHOLDER = !window.S4C_FIREBASE_CONFIG ||
-      (window.S4C_FIREBASE_CONFIG.apiKey || '').startsWith('REPLACE_');
-
-  if (IS_PLACEHOLDER) {
-    el('firebase-notice').classList.add('show');
-  } else {
-    try {
-      var app = firebase.initializeApp(window.S4C_FIREBASE_CONFIG, 'auth-app');
-      auth = firebase.auth(app);
-      firebaseReady = true;
-      // Observe auth state
-      auth.onAuthStateChanged(onAuthStateChanged);
-    } catch(e) {
-      el('firebase-notice').classList.add('show');
-      console.error('Firebase auth init failed:', e);
-    }
-  }
-
-  /* ─── Auth state handler ─── */
-  function onAuthStateChanged(user) {
-    var main = el('auth-card-main');
-    var panel = el('loggedin-panel');
-    if (user) {
-      var name  = user.displayName || user.email.split('@')[0];
-      var email = user.email;
-      var initials = (user.displayName || 'U').slice(0, 2).toUpperCase();
-      el('loggedin-avatar').textContent = initials;
-      el('loggedin-name').textContent   = user.displayName || name;
-      el('loggedin-email').textContent  = email;
-      panel.classList.add('show');
-      main.style.display = 'none';
-    } else {
-      panel.classList.remove('show');
-      main.style.display = '';
-    }
-  }
-
-  /* ─── Log out ─── */
-  el('btn-logout').addEventListener('click', function() {
-    if (!auth) return;
-    auth.signOut().catch(function(e) { console.error(e); });
-  });
-
-  /* ─── Friendly error messages ─── */
-  function friendlyError(code) {
-    var map = {
-      'auth/user-not-found':          'No account found with that email address.',
-      'auth/wrong-password':          'Incorrect password. Please try again.',
-      'auth/invalid-email':           'Please enter a valid email address.',
-      'auth/email-already-in-use':    'An account with that email already exists. Try logging in.',
-      'auth/weak-password':           'Password must be at least 6 characters.',
-      'auth/too-many-requests':       'Too many attempts. Please wait a moment and try again.',
-      'auth/network-request-failed':  'Network error. Please check your connection.',
-      'auth/invalid-credential':      'Incorrect email or password.',
-      'auth/user-disabled':           'This account has been disabled. Contact support.',
-      'auth/operation-not-allowed':   'Email/password sign-in is not enabled. Contact the site admin.'
-    };
-    return map[code] || 'An error occurred. Please try again.';
-  }
-
-  /* ─── Validate email ─── */
-  function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
-
-  /* ─── Log in form ─── */
-  el('form-login').addEventListener('submit', function(e) {
-    e.preventDefault();
-    hideError('login'); hideSuccess('login');
-    var email = el('login-email').value.trim();
-    var pw    = el('login-password').value;
-
-    if (!email || !isEmail(email)) { showError('login', 'Please enter a valid email address.'); return; }
-    if (!pw)                        { showError('login', 'Please enter your password.'); return; }
-    if (!firebaseReady)             { showError('login', 'Authentication is not configured yet. See firebase-config.js.'); return; }
-
-    setLoading('login', true);
-    auth.signInWithEmailAndPassword(email, pw)
-      .then(function() { setLoading('login', false); })
-      .catch(function(err) {
-        setLoading('login', false);
-        showError('login', friendlyError(err.code));
-      });
-  });
-
-  /* ─── Sign up form ─── */
-  el('form-signup').addEventListener('submit', function(e) {
-    e.preventDefault();
-    hideError('signup'); hideSuccess('signup');
-    var name    = el('signup-name').value.trim();
-    var email   = el('signup-email').value.trim();
-    var pw      = el('signup-password').value;
-    var confirm = el('signup-confirm').value;
-
-    if (!name)                     { showError('signup', 'Please enter your full name.'); return; }
-    if (!email || !isEmail(email)) { showError('signup', 'Please enter a valid email address.'); return; }
-    if (pw.length < 6)             { showError('signup', 'Password must be at least 6 characters.'); return; }
-    if (pw !== confirm)            { showError('signup', 'Passwords do not match.'); return; }
-    if (!firebaseReady)            { showError('signup', 'Authentication is not configured yet. See firebase-config.js.'); return; }
-
-    setLoading('signup', true);
-    auth.createUserWithEmailAndPassword(email, pw)
-      .then(function(cred) {
-        return cred.user.updateProfile({ displayName: name });
-      })
-      .then(function() {
-        return auth.currentUser.sendEmailVerification();
-      })
-      .then(function() {
-        setLoading('signup', false);
-        showSuccess('signup', '✅ Account created! A verification email has been sent to ' + email + '. Check your inbox.');
-        el('form-signup').reset();
-        el('pw-strength-bar').style.width = '0%';
-      })
-      .catch(function(err) {
-        setLoading('signup', false);
-        showError('signup', friendlyError(err.code));
-      });
-  });
-
-  /* ─── Password reset form ─── */
-  el('form-reset').addEventListener('submit', function(e) {
-    e.preventDefault();
-    hideError('reset'); hideSuccess('reset');
-    var email = el('reset-email').value.trim();
-
-    if (!email || !isEmail(email)) { showError('reset', 'Please enter a valid email address.'); return; }
-    if (!firebaseReady)            { showError('reset', 'Authentication is not configured yet. See firebase-config.js.'); return; }
-
-    setLoading('reset', true);
-    auth.sendPasswordResetEmail(email)
-      .then(function() {
-        setLoading('reset', false);
-        showSuccess('reset', '✅ Reset link sent to ' + email + '. Check your inbox (and spam folder).');
-        el('form-reset').reset();
-      })
-      .catch(function(err) {
-        setLoading('reset', false);
-        showError('reset', friendlyError(err.code));
-      });
-  });
-
-  /* ─── Handle ?tab= URL param (e.g. login.html?tab=signup) ─── */
-  var params = new URLSearchParams(window.location.search);
-  var tabParam = params.get('tab');
-  if (tabParam === 'signup' || tabParam === 'reset') switchTab(tabParam);
-
-  /* ─── Auto-redirect if already logged in ─── */
-  // (handled by onAuthStateChanged – shows logged-in panel)
-
-})();
-</script>
+<script src="login.js?v=1"></script>
 <!-- Footer -->
 <footer class="footer_wrap"><div class="u-embed-css w-embed"><style>
   .footer_wrap a {
