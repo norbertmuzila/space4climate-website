@@ -13,3 +13,5 @@ space4climate/.s4c-data/
 
 # Python bytecode cache
 __pycache__/
+
+.env*
