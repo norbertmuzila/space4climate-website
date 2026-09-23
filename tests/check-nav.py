@@ -17,6 +17,16 @@ Each check here corresponds to a bug that actually shipped:
   hidden switcher    The language switcher was placed inside .nav_btn_dekstop,
                      which is display:none below 992px, so phone users could not
                      change language at all. It belongs after that container.
+
+  zero-width nav     .u-container is max-width: var(--container--main), and the
+                     theme's own default for that variable is 0px. Every page
+                     must override it in the page_code_base block, or its nav
+                     container collapses to zero width and the logo, menu and
+                     buttons render on top of one another.
+
+  reset buttons      The theme resets padding on every button inside .u-body.
+                     That is a class+element selector, so any single-class rule
+                     of ours loses to it and the button renders with no padding.
 """
 from __future__ import annotations
 
@@ -90,6 +100,18 @@ def main() -> int:
             failures.append(f"{rel}: switcher is inside .nav_btn_dekstop, so it vanishes below 992px")
         if text.index("s4c-lang-switch") > closing:
             failures.append(f"{rel}: switcher sits after the menu button instead of before it")
+
+    # 4. Every real page must set the container width variable.
+    for path, text in real_pages():
+        rel = path.relative_to(SITE).as_posix()
+        if "--container--main" not in text:
+            failures.append(f"{rel}: no --container--main, so .u-container collapses to zero width")
+
+    # 5. Rules that style a <button> must outrank the theme's .u-body reset.
+    perf = (SITE / "perf.css").read_text(encoding="utf-8")
+    for selector in (".s4c-lang-btn {", ".s4c-lang-btn.is-active {"):
+        if selector in perf and f".u-body {selector}" not in perf:
+            failures.append(f"perf.css: '{selector.strip(' {{')}' loses to .u-body button and will lose its padding")
 
     print(f"redirect stubs checked : {stub_count}")
     print(f"real pages checked     : {page_count}")

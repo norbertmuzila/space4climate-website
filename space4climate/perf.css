@@ -232,7 +232,7 @@ img.u-cover-absolute,
   flex: none;
 }
 
-.s4c-lang-btn {
+.u-body .s4c-lang-btn {
   appearance: none;
   border: 0;
   background: transparent;
@@ -247,17 +247,17 @@ img.u-cover-absolute,
   cursor: pointer;
 }
 
-.s4c-lang-btn.is-active {
+.u-body .s4c-lang-btn.is-active {
   background: currentColor;
 }
 
 /* The label has to flip against the filled pill, whichever way round the
    nav's colours currently are. */
-.s4c-lang-btn.is-active span {
+.u-body .s4c-lang-btn.is-active span {
   filter: invert(1) grayscale(1) contrast(3);
 }
 
-.s4c-lang-btn:focus-visible {
+.u-body .s4c-lang-btn:focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 1px;
 }
