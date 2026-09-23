@@ -185,19 +185,51 @@ img.u-cover-absolute,
   }
 }
 
+/* ── Navigation layout guards ────────────────────────────────────────────
+   At >=992px the nav is a three-column grid whose tracks are minmax(0, ...).
+   A track that is too narrow for its contents does not push its neighbours
+   aside, it lets them overflow across each other, so adding a menu item or
+   widening the logo silently produced overlapping text. Sizing the outer
+   tracks to their content and handing the remainder to the centre makes that
+   collision impossible: the menu is the only thing that can run short of
+   room, and it gives up its own gap first. */
+@media screen and (min-width: 992px) {
+  .nav_contain.u-container {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    column-gap: 1.5rem;
+  }
+  .nav_menu_layout {
+    min-width: 0;
+    column-gap: clamp(0.85rem, 1.6vw, 2rem);
+  }
+  .nav_menu_text {
+    white-space: nowrap;
+  }
+}
+
 /* ── Language switcher ───────────────────────────────────────────────────
-   Sits in the nav button row on every page. It borrows currentColor so it
-   stays legible through all three nav states: transparent over the video
-   hero, .scrolled on white, and .open on dark. */
+   Sits last in the button row, so it lands in the far top-right corner on
+   desktop. It is a sibling of .nav_btn_dekstop rather than a child, because
+   that container is display:none below 992px and the switcher would vanish
+   on phones. .nav_btn_dekstop is a block element, so the row needs to be
+   flex or the switcher drops onto a second line. */
+.nav_btn_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
 .s4c-lang-switch {
   display: inline-flex;
   align-items: center;
   gap: 0.15rem;
-  margin-right: 0.75rem;
+  margin-left: 0.75rem;
   padding: 0.15rem;
   border: 1.5px solid currentColor;
   border-radius: 0.5rem;
   opacity: 0.85;
+  flex: none;
 }
 
 .s4c-lang-btn {
@@ -231,8 +263,10 @@ img.u-cover-absolute,
 }
 
 @media screen and (max-width: 991px) {
+  /* On mobile the menu button follows it, so the gap moves to the other side. */
   .s4c-lang-switch {
-    margin-right: 0.5rem;
+    margin-left: 0;
+    margin-right: 0.75rem;
   }
 }
 
