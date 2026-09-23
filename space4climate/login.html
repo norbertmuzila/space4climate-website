@@ -15,86 +15,106 @@
 html,body{overflow-y:auto!important;height:auto!important;}
 .page_code_wrap{overflow:visible!important;height:auto!important;}
 
+/* This page arrived with its own indigo-and-white palette, which matched
+   nothing else on the site. These rules map it onto the same swatches every
+   other page uses: a black ground, white text, and the #ebfd40 brand for
+   accents with dark text on brand fills, the way --swatch--brand-text is
+   used elsewhere. */
+html,body{background:var(--swatch--dark,#000);color:var(--swatch--light,#fff);}
+:root{
+  --lg-brand:var(--swatch--brand,#ebfd40);
+  --lg-brand-text:var(--swatch--dark,#000);
+  --lg-text:var(--swatch--light,#fff);
+  --lg-text2:rgba(255,255,255,.72);
+  --lg-text3:rgba(255,255,255,.5);
+  --lg-border:rgba(255,255,255,.16);
+  --lg-surface:rgba(255,255,255,.045);
+  --lg-danger:#ff6b6b;
+  --lg-success:#7cffb0;
+  --lg-gold:#ffc94d;
+}
+
 /* ===== HERO ===== */
-.login-hero{background:linear-gradient(150deg,#0f0c29 0%,#1a1a4e 40%,#0d2137 100%);padding:6.5rem 0 4rem;position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center;}
-.login-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 60%,rgba(62,140,255,.18) 0%,transparent 55%),radial-gradient(ellipse at 80% 25%,rgba(138,255,160,.12) 0%,transparent 55%);pointer-events:none;}
-.login-hero::after{content:'';position:absolute;inset:0;background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1px 1px at 30% 50%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 70% 15%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 90% 40%,rgba(255,255,255,.3) 0%,transparent 100%);pointer-events:none;}
+.login-hero{background:var(--swatch--dark,#000);padding:6.5rem 0 4rem;position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center;}
+.login-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 20% 60%,rgba(235,253,64,.14) 0%,transparent 55%),radial-gradient(ellipse at 80% 25%,rgba(71,205,213,.10) 0%,transparent 55%);pointer-events:none;}
+.login-hero::after{content:"";position:absolute;inset:0;background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,.5) 0%,transparent 100%),radial-gradient(1px 1px at 30% 50%,rgba(255,255,255,.3) 0%,transparent 100%),radial-gradient(1px 1px at 70% 15%,rgba(255,255,255,.4) 0%,transparent 100%),radial-gradient(1px 1px at 90% 40%,rgba(255,255,255,.3) 0%,transparent 100%);pointer-events:none;}
 .login-hero-inner{position:relative;z-index:1;width:100%;max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;gap:5rem;align-items:center;justify-content:space-between;}
 
 /* ===== LEFT COLUMN ===== */
 .login-left{flex:1;max-width:440px;}
-.login-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(62,140,255,.15);border:1px solid rgba(62,140,255,.35);color:#7eb8ff;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.35rem .9rem;border-radius:2rem;margin-bottom:1.5rem;}
-.login-hero-title{font-size:3rem;font-weight:800;color:#fff;margin-bottom:1rem;line-height:1.15;letter-spacing:-.02em;}
-.login-hero-title span{background:linear-gradient(90deg,#3e8cff,#8affb4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.login-hero-sub{font-size:1rem;color:#a0aec0;line-height:1.7;margin-bottom:2rem;}
+.login-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(235,253,64,.14);border:1px solid rgba(235,253,64,.4);color:var(--lg-brand,#ebfd40);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.35rem .9rem;border-radius:2rem;margin-bottom:1.5rem;}
+.login-hero-title{font-size:3rem;font-weight:700;color:var(--lg-text,#fff);margin-bottom:1rem;line-height:1.15;letter-spacing:-.02em;}
+.login-hero-title span{background:linear-gradient(90deg,#ebfd40,#47cdd5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.login-hero-sub{font-size:1rem;color:var(--lg-text2,rgba(255,255,255,.72));line-height:1.7;margin-bottom:2rem;}
 .login-features{display:flex;flex-direction:column;gap:.75rem;}
-.login-feature{display:flex;align-items:center;gap:.75rem;font-size:.92rem;color:#cbd5e1;}
-.login-feature-icon{width:1.5rem;height:1.5rem;background:rgba(62,140,255,.15);border:1px solid rgba(62,140,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;}
+.login-feature{display:flex;align-items:center;gap:.75rem;font-size:.92rem;color:var(--lg-text2,rgba(255,255,255,.72));}
+.login-feature-icon{width:1.5rem;height:1.5rem;background:rgba(235,253,64,.14);border:1px solid rgba(235,253,64,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;color:var(--lg-brand,#ebfd40);}
 
-/* ===== RIGHT COLUMN – CARD ===== */
+/* ===== RIGHT COLUMN - CARD ===== */
 .login-card-wrap{flex:0 0 420px;}
-.login-card{background:#ffffff;border-radius:1.5rem;padding:2.5rem;box-shadow:0 30px 80px rgba(0,0,20,.5);border:1px solid rgba(255,255,255,.08);}
+.login-card{background:#0b0b0b;border-radius:1.5rem;padding:2.5rem;box-shadow:0 30px 80px rgba(0,0,0,.6);border:1px solid var(--lg-border,rgba(255,255,255,.16));}
 
 /* ===== TABS ===== */
-.login-tabs{display:flex;gap:.35rem;background:#f0f4fa;padding:.3rem;border-radius:.65rem;margin-bottom:2rem;border:1px solid #e2e8f0;}
-.login-tab{flex:1;text-align:center;padding:.55rem .5rem;border-radius:.45rem;border:none;background:transparent;font-size:.88rem;font-weight:600;color:#64748b;cursor:pointer;transition:all .2s;}
-.login-tab.active{background:#fff;color:#0f1f3d;box-shadow:0 2px 8px rgba(30,40,100,.1);}
-.login-tab:hover:not(.active){color:#3e8cff;}
+.login-tabs{display:flex;gap:.35rem;background:var(--lg-surface,rgba(255,255,255,.045));padding:.3rem;border-radius:.65rem;margin-bottom:2rem;border:1px solid var(--lg-border,rgba(255,255,255,.16));}
+.login-tab{flex:1;text-align:center;padding:.55rem .5rem;border-radius:.45rem;border:none;background:transparent;font-size:.88rem;font-weight:600;color:var(--lg-text2,rgba(255,255,255,.72));cursor:pointer;transition:all .2s;}
+.login-tab.active{background:var(--lg-brand,#ebfd40);color:var(--lg-brand-text,#000);}
+.login-tab:hover:not(.active){color:var(--lg-brand,#ebfd40);}
 
 /* ===== FORMS ===== */
 .login-form-section{display:none;}
 .login-form-section.active{display:block;}
-.login-form-title{font-size:1.5rem;font-weight:800;color:#0f1f3d;margin-bottom:.3rem;letter-spacing:-.01em;}
-.login-form-sub{font-size:.88rem;color:#64748b;margin-bottom:1.75rem;line-height:1.6;}
+.login-form-title{font-size:1.5rem;font-weight:700;color:var(--lg-text,#fff);margin-bottom:.3rem;letter-spacing:-.01em;}
+.login-form-sub{font-size:.88rem;color:var(--lg-text2,rgba(255,255,255,.72));margin-bottom:1.75rem;line-height:1.6;}
 .lf-group{margin-bottom:1.1rem;}
-.lf-group label{display:block;font-size:.82rem;font-weight:700;color:#374151;margin-bottom:.4rem;letter-spacing:.01em;}
-.lf-group input{width:100%;box-sizing:border-box;border:1.5px solid #e2e8f0;border-radius:.6rem;padding:.72rem .9rem;font-size:.95rem;font-family:inherit;color:#0f1f3d;background:#fafbff;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;}
-.lf-group input:focus{outline:none;border-color:#3e8cff;background:#fff;box-shadow:0 0 0 3px rgba(62,140,255,.12);}
+.lf-group label{display:block;font-size:.82rem;font-weight:600;color:var(--lg-text,#fff);margin-bottom:.4rem;letter-spacing:.01em;}
+.lf-group input{width:100%;box-sizing:border-box;border:1.5px solid var(--lg-border,rgba(255,255,255,.16));border-radius:.6rem;padding:.72rem .9rem;font-size:.95rem;font-family:inherit;color:var(--lg-text,#fff);background:var(--lg-surface,rgba(255,255,255,.045));transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;color-scheme:dark;}
+.lf-group input::placeholder{color:var(--lg-text3,rgba(255,255,255,.5));}
+.lf-group input:focus{outline:none;border-color:var(--lg-brand,#ebfd40);background:rgba(255,255,255,.07);box-shadow:0 0 0 3px rgba(235,253,64,.18);}
 .lf-pw-wrap{position:relative;}
 .lf-pw-wrap input{padding-right:2.75rem;}
-.lf-pw-toggle{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:#94a3b8;padding:.2rem;transition:color .2s;display:flex;align-items:center;}
-.lf-pw-toggle:hover{color:#3e8cff;}
-.lf-submit{width:100%;background:linear-gradient(135deg,#3e8cff 0%,#5ba0ff 100%);color:#fff;padding:.85rem 1.5rem;border-radius:.65rem;border:none;font-size:1rem;font-weight:700;cursor:pointer;transition:all .25s;box-shadow:0 4px 16px rgba(62,140,255,.3);margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem;}
-.lf-submit:hover{background:linear-gradient(135deg,#2d6dd4 0%,#4a8ee8 100%);transform:translateY(-1px);box-shadow:0 6px 20px rgba(62,140,255,.45);}
+.lf-pw-toggle{position:absolute;right:.75rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--lg-text3,rgba(255,255,255,.5));padding:.2rem;transition:color .2s;display:flex;align-items:center;}
+.lf-pw-toggle:hover{color:var(--lg-brand,#ebfd40);}
+.lf-submit{width:100%;background:var(--lg-brand,#ebfd40);color:var(--lg-brand-text,#000);padding:.85rem 1.5rem;border-radius:.65rem;border:none;font-size:1rem;font-weight:700;cursor:pointer;transition:all .25s;box-shadow:0 4px 16px rgba(235,253,64,.22);margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem;}
+.lf-submit:hover{background:#f4ff7d;transform:translateY(-1px);box-shadow:0 6px 20px rgba(235,253,64,.34);}
 .lf-submit:disabled{opacity:.6;cursor:not-allowed;transform:none;}
-.lf-error{font-size:.85rem;color:#dc2626;background:#fef2f2;border:1px solid #fecaca;border-radius:.5rem;padding:.65rem .85rem;margin-bottom:1rem;display:none;}
+.lf-error{font-size:.85rem;color:var(--lg-danger,#ff6b6b);background:rgba(255,107,107,.12);border:1px solid rgba(255,107,107,.38);border-radius:.5rem;padding:.65rem .85rem;margin-bottom:1rem;display:none;}
 .lf-error.show{display:block;}
-.lf-success{font-size:.88rem;color:#065f46;background:#d1fae5;border:1px solid #6ee7b7;border-radius:.5rem;padding:.65rem .85rem;margin-bottom:1rem;display:none;}
+.lf-success{font-size:.88rem;color:var(--lg-success,#7cffb0);background:rgba(124,255,176,.12);border:1px solid rgba(124,255,176,.38);border-radius:.5rem;padding:.65rem .85rem;margin-bottom:1rem;display:none;}
 .lf-success.show{display:block;}
-.lf-link{font-size:.83rem;color:#3e8cff;background:none;border:none;cursor:pointer;text-decoration:underline;padding:0;transition:color .2s;}
-.lf-link:hover{color:#2d6dd4;}
-.lf-optional{color:#94a3b8;font-weight:400;font-size:.82rem;}
-.lf-help{font-size:.78rem;color:#64748b;margin:.35rem 0 0;line-height:1.5;}
+.lf-link{font-size:.83rem;color:var(--lg-brand,#ebfd40);background:none;border:none;cursor:pointer;text-decoration:underline;padding:0;transition:color .2s;}
+.lf-link:hover{color:#f4ff7d;}
+.lf-optional{color:var(--lg-text3,rgba(255,255,255,.5));font-weight:400;font-size:.82rem;}
+.lf-help{font-size:.78rem;color:var(--lg-text2,rgba(255,255,255,.72));margin:.35rem 0 0;line-height:1.5;}
 .lf-google-wrap{display:none;}
 .lf-google{display:flex;justify-content:center;margin:.35rem 0 .75rem;}
-.lf-divider{font-size:.82rem;color:#94a3b8;text-align:center;margin:.75rem 0;}
-.lf-pw-strength{height:3px;border-radius:2px;margin-top:.4rem;background:#e2e8f0;overflow:hidden;}
+.lf-divider{font-size:.82rem;color:var(--lg-text3,rgba(255,255,255,.5));text-align:center;margin:.75rem 0;}
+.lf-pw-strength{height:3px;border-radius:2px;margin-top:.4rem;background:rgba(255,255,255,.16);overflow:hidden;}
 .lf-pw-strength-bar{height:100%;border-radius:2px;transition:width .3s,background .3s;}
 
 /* ===== LOGGED-IN STATE ===== */
 .login-loggedin{display:none;}
 .login-loggedin.show{display:block;}
-.loggedin-avatar{width:4rem;height:4rem;background:linear-gradient(135deg,#3e8cff,#8affb4);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:1.25rem;text-transform:uppercase;}
-.loggedin-name{font-size:1.4rem;font-weight:800;color:#0f1f3d;margin-bottom:.25rem;}
-.loggedin-email{font-size:.88rem;color:#64748b;margin-bottom:1.5rem;}
+.loggedin-avatar{width:4rem;height:4rem;background:linear-gradient(135deg,#ebfd40,#47cdd5);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;color:var(--lg-brand-text,#000);margin-bottom:1.25rem;text-transform:uppercase;}
+.loggedin-name{font-size:1.4rem;font-weight:700;color:var(--lg-text,#fff);margin-bottom:.25rem;}
+.loggedin-email{font-size:.88rem;color:var(--lg-text2,rgba(255,255,255,.72));margin-bottom:1.5rem;}
 .loggedin-actions{display:flex;flex-direction:column;gap:.75rem;}
 .loggedin-btn{display:flex;align-items:center;gap:.6rem;padding:.75rem 1.25rem;border-radius:.65rem;text-decoration:none;font-weight:600;font-size:.9rem;transition:all .2s;justify-content:center;}
-.loggedin-btn.primary{background:linear-gradient(135deg,#3e8cff,#5ba0ff);color:#fff;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(62,140,255,.3);}
-.loggedin-btn.primary:hover{background:linear-gradient(135deg,#2d6dd4,#4a8ee8);box-shadow:0 6px 18px rgba(62,140,255,.45);}
-.loggedin-btn.secondary{background:#f8fafc;border:1.5px solid #e2e8f0;color:#64748b;cursor:pointer;}
-.loggedin-btn.secondary:hover{background:#f0f4fa;color:#0f1f3d;}
-.loggedin-btn.danger{background:#fff1f2;border:1.5px solid #fecaca;color:#dc2626;cursor:pointer;}
-.loggedin-btn.danger:hover{background:#fee2e2;}
+.loggedin-btn.primary{background:var(--lg-brand,#ebfd40);color:var(--lg-brand-text,#000);border:none;cursor:pointer;box-shadow:0 4px 14px rgba(235,253,64,.22);}
+.loggedin-btn.primary:hover{background:#f4ff7d;box-shadow:0 6px 18px rgba(235,253,64,.34);}
+.loggedin-btn.secondary{background:transparent;border:1.5px solid var(--lg-border,rgba(255,255,255,.16));color:var(--lg-text,#fff);cursor:pointer;}
+.loggedin-btn.secondary:hover{background:rgba(255,255,255,.08);border-color:var(--lg-text,#fff);}
+.loggedin-btn.danger{background:transparent;border:1.5px solid rgba(255,107,107,.45);color:var(--lg-danger,#ff6b6b);cursor:pointer;}
+.loggedin-btn.danger:hover{background:rgba(255,107,107,.14);}
 
 /* ===== FORGOT PASSWORD SECTION ===== */
-.lf-reset-back{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:#64748b;background:none;border:none;cursor:pointer;padding:0;margin-bottom:1.5rem;transition:color .2s;}
-.lf-reset-back:hover{color:#3e8cff;}
+.lf-reset-back{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--lg-text2,rgba(255,255,255,.72));background:none;border:none;cursor:pointer;padding:0;margin-bottom:1.5rem;transition:color .2s;}
+.lf-reset-back:hover{color:var(--lg-brand,#ebfd40);}
 .lf-reset-back svg{width:.9rem;height:.9rem;}
 
 /* ===== ACCOUNTS UNAVAILABLE NOTICE ===== */
-.auth-notice{background:#fffbeb;border:1px solid #fde68a;border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:.85rem;color:#92400e;line-height:1.6;display:none;}
+.auth-notice{background:rgba(255,201,77,.12);border:1px solid rgba(255,201,77,.4);border-radius:.75rem;padding:1rem 1.25rem;margin-bottom:1.5rem;font-size:.85rem;color:var(--lg-gold,#ffc94d);line-height:1.6;display:none;}
 .auth-notice.show{display:block;}
-.auth-notice a{color:#b45309;font-weight:600;}
+.auth-notice a{color:var(--lg-gold,#ffc94d);font-weight:600;}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:900px){
@@ -287,11 +307,11 @@ html,body{overflow-y:auto!important;height:auto!important;}
 
             <form id="form-login" novalidate>
               <div class="lf-group">
-                <label for="login-email">Username or email <span style="color:#dc2626" aria-hidden="true">*</span></label>
+                <label for="login-email">Username or email <span style="color:#ff6b6b" aria-hidden="true">*</span></label>
                 <input type="text" id="login-email" name="identifier" autocomplete="username" required placeholder="Your username or you@example.com"/>
               </div>
               <div class="lf-group">
-                <label for="login-password">Password <span style="color:#dc2626" aria-hidden="true">*</span></label>
+                <label for="login-password">Password <span style="color:#ff6b6b" aria-hidden="true">*</span></label>
                 <div class="lf-pw-wrap">
                   <input type="password" id="login-password" name="password" autocomplete="current-password" required placeholder="Your password"/>
                   <button type="button" class="lf-pw-toggle" aria-label="Toggle password visibility" data-target="login-password">
@@ -312,7 +332,7 @@ html,body{overflow-y:auto!important;height:auto!important;}
               <div id="google-signin" class="lf-google"></div>
             </div>
             <div class="lf-divider">— or —</div>
-            <div style="text-align:center;font-size:.88rem;color:#64748b;">
+            <div style="text-align:center;font-size:.88rem;color:rgba(255,255,255,.72);">
               New here? <button type="button" class="lf-link" id="btn-go-signup">Create a free account</button>
             </div>
           </div>
@@ -327,11 +347,11 @@ html,body{overflow-y:auto!important;height:auto!important;}
 
             <form id="form-signup" novalidate>
               <div class="lf-group">
-                <label for="signup-name">Full name <span style="color:#dc2626" aria-hidden="true">*</span></label>
+                <label for="signup-name">Full name <span style="color:#ff6b6b" aria-hidden="true">*</span></label>
                 <input type="text" id="signup-name" name="name" autocomplete="name" required placeholder="Your full name"/>
               </div>
               <div class="lf-group">
-                <label for="signup-email">Email address <span style="color:#dc2626" aria-hidden="true">*</span></label>
+                <label for="signup-email">Email address <span style="color:#ff6b6b" aria-hidden="true">*</span></label>
                 <input type="email" id="signup-email" name="email" autocomplete="email" required placeholder="you@example.com"/>
               </div>
               <div class="lf-group">
@@ -340,7 +360,7 @@ html,body{overflow-y:auto!important;height:auto!important;}
                 <p class="lf-help">3-30 characters. You can log in with this or with your email. Leave blank and we will pick one for you.</p>
               </div>
               <div class="lf-group">
-                <label for="signup-password">Password <span style="color:#dc2626" aria-hidden="true">*</span></label>
+                <label for="signup-password">Password <span style="color:#ff6b6b" aria-hidden="true">*</span></label>
                 <div class="lf-pw-wrap">
                   <input type="password" id="signup-password" name="password" autocomplete="new-password" required placeholder="At least 8 characters"/>
                   <button type="button" class="lf-pw-toggle" aria-label="Toggle password visibility" data-target="signup-password">
@@ -350,7 +370,7 @@ html,body{overflow-y:auto!important;height:auto!important;}
                 <div class="lf-pw-strength" aria-hidden="true"><div id="pw-strength-bar" class="lf-pw-strength-bar" style="width:0%;background:#e2e8f0;"></div></div>
               </div>
               <div class="lf-group">
-                <label for="signup-confirm">Confirm password <span style="color:#dc2626" aria-hidden="true">*</span></label>
+                <label for="signup-confirm">Confirm password <span style="color:#ff6b6b" aria-hidden="true">*</span></label>
                 <div class="lf-pw-wrap">
                   <input type="password" id="signup-confirm" name="confirm" autocomplete="new-password" required placeholder="Repeat password"/>
                   <button type="button" class="lf-pw-toggle" aria-label="Toggle password visibility" data-target="signup-confirm">
@@ -364,7 +384,7 @@ html,body{overflow-y:auto!important;height:auto!important;}
               </button>
             </form>
             <div class="lf-divider">— or —</div>
-            <div style="text-align:center;font-size:.88rem;color:#64748b;">
+            <div style="text-align:center;font-size:.88rem;color:rgba(255,255,255,.72);">
               Already have an account? <button type="button" class="lf-link" id="btn-go-login">Log in</button>
             </div>
           </div>
@@ -383,7 +403,7 @@ html,body{overflow-y:auto!important;height:auto!important;}
 
             <form id="form-reset" novalidate>
               <div class="lf-group">
-                <label for="reset-email">Email address <span style="color:#dc2626" aria-hidden="true">*</span></label>
+                <label for="reset-email">Email address <span style="color:#ff6b6b" aria-hidden="true">*</span></label>
                 <input type="email" id="reset-email" name="email" autocomplete="email" required placeholder="you@example.com"/>
               </div>
               <button type="submit" class="lf-submit" id="btn-reset">
